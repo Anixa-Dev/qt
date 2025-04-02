@@ -553,4 +553,35 @@ export const scanRestrictionOptions = [
     label: 'All Scans: Green',
     value: SCAN_RESTRICTION_VALUES.ALL_GREEN,
   },
+];
+
+export const appreciationSelectValues = [
+  {
+    id: 1,
+    label: 'Yes',
+    value: true,
+  },
+  {
+    id: 2,
+    label: 'No',
+    value: false,
+  },
+];
+
+export const currencySelectValues = [
+  {
+    id: 1,
+    label: 'USD',
+    value: 'USD',
+  },
+  {
+    id: 2,
+    label: 'EUR',
+    value: 'EUR',
+  },
+  {
+    id: 3,
+    label: 'GBP',
+    value: 'GBP',
+  },
 ]; 
