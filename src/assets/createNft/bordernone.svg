@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="400" height="480">
+	<title>Border</title>
+	<defs>
+		<filter x="-50%" y="-50%" width="200%" height="200%" id="f1"> <feGaussianBlur stdDeviation="0"/> </filter>
+	</defs>
+	<style>
+	  .s0 { stroke-linejoin: round;}
+	</style>
+	<path id="Border-out-left" class="s0" d="m-5.6 479.5v-479.3h13.5v479.3z"/>
+	<path id="Border-out-right" class="s0" d="m392.4 479.5v-479.3h13.5v479.3z"/>
+	<path id="Border-out-top" class="s0" d="m0.4 11.3v-13.1h399.6v13.1z"/>
+	<path id="Border-out-bottom" class="s0" d="m0.4 482.3v-13.1h399.6v13.1z"/>
+</svg>
