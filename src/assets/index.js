@@ -48,8 +48,8 @@ import CounterTenDesktopHeaderLogoDark from './header/counterTenDesktopHeaderDar
 
 import CounterTenMobileHeaderLogo from './header/counterTenMobileHeader.png'
 import CounterTenDesktopLogo from './header/counterTenLogoDesktop.svg'
-import { ReactComponent as CounterTenMobileLogo } from './header/counterTenLogoMobile.svg'
-import { ReactComponent as CounterTenMobileDark } from './header/counterTenLogoDark.svg'
+import CounterTenMobileLogo from './header/counterTenLogoMobile.svg'
+import CounterTenMobileDark from './header/counterTenLogoDark.svg'
 
 import CounterTenDesktopMobileFooterLogo from './footer/counterTenMobileFooter.png'
 

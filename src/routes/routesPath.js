@@ -19,7 +19,7 @@ export const ROUTE_PATH_SHORTHANDS = {
   USER_SUBSCRIPTIONS: '/user/subscriptions',
 }
 
-const ROUTE_PATHS = {
+export const ROUTE_PATHS = {
   HOME: '/',
   USER_HOME: '/user/home',
   COMPANY_HOME: '/company/home',
@@ -50,7 +50,7 @@ const ROUTE_PATHS = {
   USER_BLOCKCHAIN_DETAILS: '/user/blockchain-details',
   USER_SUBSCRIPTIONS: `${ ROUTE_PATH_SHORTHANDS.USER_SUBSCRIPTIONS }`,
   USER_SUBSCRIPTION_DETAIL: `${ ROUTE_PATH_SHORTHANDS.USER_SUBSCRIPTIONS }/:subscription_id`,
-  COMPANY_PROFILE: '/company/profile',
+  COMPANY_PROFILE: '/company-profile',
   COMPANY_BANKING_DETAILS: '/company/banking-details',
   COMPANY_PRIMARY_CONTACT: '/company/primary-contact',
   COMPANY_CREDITS: '/company/credits',
@@ -61,6 +61,9 @@ const ROUTE_PATHS = {
   SEND_INVITE: `${ ROUTE_PATH_SHORTHANDS.SEND_INVITE }/:id`,
   PROMOTION_CODES: `${ ROUTE_PATH_SHORTHANDS.PROMOTION_CODES }/:id`,
   OFFERS: `${ ROUTE_PATH_SHORTHANDS.OFFERS }/:id`,
+  DASHBOARD: '/dashboard',
+  PROFILE: '/profile',
+  SETTINGS: '/settings',
+  PURCHASE: '/purchase',
+  TOKEN: '/token'
 }
-
-export default ROUTE_PATHS

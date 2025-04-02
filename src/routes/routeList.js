@@ -1,37 +1,38 @@
-import AddCompany from '../pages/addCompany'
-import BuyTokenPage from '../pages/buyToken'
-import CompanyLandingPage from '../pages/companyLandingPage'
-import EmailVerificationPage from '../pages/emailVerification'
-import EmbedTokenPage from '../pages/iframe'
-import LandingPage from '../pages/landingPage'
-import Login from '../pages/login'
-import ResetPasswordPage from '../pages/resetPassword'
-import UserLandingPage from '../pages/userLandingPage'
-import VerifyToken from '../pages/verifyToken'
-import ROUTE_PATHS from './routesPath'
-import ValidateToken from '../pages/validateToken'
-import CompanyTokens from '../pages/companyTokens'
-import UserTokens from '../pages/userTokens'
-import UserSettings from '../pages/userProfile'
-import CompanySettings from '../pages/companyProfile'
-import UserTransactionsPage from '../pages/userTransactions'
-import PaymentStatus from '../pages/paymentStatus'
-import TransactionDetails from '../pages/transactionDetails'
-import SignupForm from '../pages/signup2/bforms/create'
-import CreateNftForm from '../pages/createToken/bforms/create'
-import ConfirmPurchaseNew from '../pages/confirmPurchaseNew/bforms/create'
-import EditNftForm from '../pages/createToken/bforms/edit'
-import EditPublishedNft from '../pages/createToken/bforms/published'
-import EditAdditionalInfo from '../pages/createToken/bforms/additional'
-import EditUserAdditionalInfo from '../pages/userTokenForm/bforms/edit'
-import HighImpactNftPreviewPage from '../pages/highImpactNftPreview'
-import AdditionalInfoPage from '../pages/additionalInfo'
-import SendInvite from '../pages/send-invite'
-import Offers from '../pages/offers'
-import OffersToken from '../pages/offersToken'
-import EditSecondaryMarketplace from '../pages/createToken/bforms/marketplace'
-import PromotionCodes from '../pages/promotionCodes'
-import UserSubscriptionDetail from '../pages/userSubscriptionDetail'
+import AddCompany from '../app/user/add-company/page'
+import BuyTokenPage from '../app/token/[id]/page'
+import CompanyLandingPage from '../app/company/home/page'
+import EmailVerificationPage from '../app/email-verification/page'
+import EmbedTokenPage from '../app/embed-token/[token_id]/page'
+import LandingPage from '../app/page'
+import Login from '../app/login/page'
+import ResetPasswordPage from '../app/reset-password/page'
+import UserLandingPage from '../app/user/home/page'
+import VerifyToken from '../app/verify-token/page'
+import { ROUTE_PATH_SHORTHANDS as ROUTE_PATHS } from './routesPath'
+import ValidateToken from '../app/validate-token/page'
+import CompanyTokens from '../app/company/tokens/page'
+import UserTokens from '../app/user/tokens/page'
+import UserSettings from '../app/user/profile/page'
+import CompanySettings from '../app/company/profile/page'
+import UserTransactionsPage from '../app/user/transactions/page'
+import PaymentStatus from '../app/payment-status/page'
+import TransactionDetails from '../app/transaction-details/page'
+import SignupForm from '../app/signup2/bforms/create/page'
+import CreateNftForm from '../app/create-token/bforms/create/page'
+import ConfirmPurchaseNew from '../app/confirm-purchase/bforms/create/page'
+import EditNftForm from '../app/create-token/bforms/edit/page'
+import EditPublishedNft from '../app/create-token/bforms/published/page'
+import EditAdditionalInfo from '../app/create-token/bforms/additional/page'
+import EditUserAdditionalInfo from '../app/user/token-form/bforms/edit/page'
+import HighImpactNftPreviewPage from '../app/high-impact-nft-preview/page'
+import AdditionalInfoPage from '../app/additional-info/[user_token_id]/page'
+import SendInvite from '../app/send-invite/page'
+import Offers from '../app/offers/page'
+import OffersToken from '../app/offers-token/[token_id]/page'
+import EditSecondaryMarketplace from '../app/create-token/bforms/marketplace/page'
+import PromotionCodes from '../app/promotion-codes/page'
+import UserSubscriptionDetail from '../app/user/subscription-detail/page'
+import { PURCHASE_REFER_NAME, TOKEN_REFER_NAME } from '../utils/constants'
 
 const routes = [
   {
@@ -249,3 +250,211 @@ const routes = [
 ]
 
 export default routes
+
+export const userTabs = [
+  {
+    id: 1,
+    label: 'Home',
+    path: '/user/home',
+    icon: 'home',
+  },
+  {
+    id: 2,
+    label: 'My Tokens',
+    path: '/user/tokens',
+    icon: 'token',
+  },
+  {
+    id: 3,
+    label: 'My Purchases',
+    path: '/user/purchases',
+    icon: 'shopping_cart',
+  },
+  {
+    id: 4,
+    label: 'My Profile',
+    path: '/user/profile',
+    icon: 'person',
+  },
+  {
+    id: 5,
+    label: 'Settings',
+    path: '/user/settings',
+    icon: 'settings',
+  },
+];
+
+export const companyTabs = [
+  {
+    id: 1,
+    label: 'Home',
+    path: '/company/home',
+    icon: 'home',
+  },
+  {
+    id: 2,
+    label: 'Tokens',
+    path: '/company/tokens',
+    icon: 'token',
+  },
+  {
+    id: 3,
+    label: 'Purchases',
+    path: '/company/purchases',
+    icon: 'shopping_cart',
+  },
+  {
+    id: 4,
+    label: 'Profile',
+    path: '/company/profile',
+    icon: 'business',
+  },
+  {
+    id: 5,
+    label: 'Settings',
+    path: '/company/settings',
+    icon: 'settings',
+  },
+];
+
+export const headerUserTabs = [
+  {
+    id: 1,
+    label: 'Home',
+    path: '/user/home',
+  },
+  {
+    id: 2,
+    label: 'My Tokens',
+    path: '/user/tokens',
+  },
+  {
+    id: 3,
+    label: 'My Purchases',
+    path: '/user/purchases',
+  },
+  {
+    id: 4,
+    label: 'My Profile',
+    path: '/user/profile',
+  },
+  {
+    id: 5,
+    label: 'Settings',
+    path: '/user/settings',
+  },
+];
+
+export const headerCompanyTabs = [
+  {
+    id: 1,
+    label: 'Home',
+    path: '/company/home',
+  },
+  {
+    id: 2,
+    label: 'Tokens',
+    path: '/company/tokens',
+  },
+  {
+    id: 3,
+    label: 'Purchases',
+    path: '/company/purchases',
+  },
+  {
+    id: 4,
+    label: 'Profile',
+    path: '/company/profile',
+  },
+  {
+    id: 5,
+    label: 'Settings',
+    path: '/company/settings',
+  },
+];
+
+export const publicRoutes = [
+  {
+    path: '/',
+    label: 'Home',
+  },
+  {
+    path: '/login',
+    label: 'Login',
+  },
+  {
+    path: '/signup',
+    label: 'Sign Up',
+  },
+  {
+    path: '/reset-password',
+    label: 'Reset Password',
+  },
+  {
+    path: '/email-verification',
+    label: 'Email Verification',
+  },
+  {
+    path: '/verify-token/[token]',
+    label: 'Verify Token',
+  },
+];
+
+export const protectedRoutes = [
+  {
+    path: '/user/home',
+    label: 'User Dashboard',
+  },
+  {
+    path: '/user/tokens',
+    label: 'My Tokens',
+  },
+  {
+    path: '/user/purchases',
+    label: 'My Purchases',
+  },
+  {
+    path: '/user/profile',
+    label: 'My Profile',
+  },
+  {
+    path: '/user/settings',
+    label: 'Settings',
+  },
+  {
+    path: '/company/home',
+    label: 'Company Dashboard',
+  },
+  {
+    path: '/company/tokens',
+    label: 'Tokens',
+  },
+  {
+    path: '/company/purchases',
+    label: 'Purchases',
+  },
+  {
+    path: '/company/profile',
+    label: 'Company Profile',
+  },
+  {
+    path: '/company/settings',
+    label: 'Settings',
+  },
+  {
+    path: '/add-company',
+    label: 'Add Company',
+  },
+  {
+    path: '/additional-info',
+    label: 'Additional Info',
+  },
+  {
+    path: '/buy-token',
+    label: 'Buy Token',
+  },
+  {
+    path: '/embed-token/[token_id]',
+    label: 'Embed Token',
+  },
+];

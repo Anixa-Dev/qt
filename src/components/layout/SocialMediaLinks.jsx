@@ -3,6 +3,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import Image from 'next/image';
 import {
   FacebookIcon,
   InstagramIcon,
@@ -22,7 +23,7 @@ const IconButton = styled('a')({
   display: 'inline-block',
 });
 
-const StyledIcon = styled('svg')(({ theme }) => ({
+const StyledIcon = styled(Image)(({ theme }) => ({
   color: colors.white,
   width: '20px',
   height: '20px',
@@ -40,7 +41,12 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <LinkedinIcon as={StyledIcon} />
+        <StyledIcon
+          src={LinkedinIcon}
+          alt="LinkedIn"
+          width={20}
+          height={20}
+        />
       </IconButton>
 
       <IconButton
@@ -48,7 +54,12 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FacebookIcon as={StyledIcon} />
+        <StyledIcon
+          src={FacebookIcon}
+          alt="Facebook"
+          width={20}
+          height={20}
+        />
       </IconButton>
 
       <IconButton
@@ -56,7 +67,12 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <InstagramIcon as={StyledIcon} />
+        <StyledIcon
+          src={InstagramIcon} 
+          alt="Instagram"
+          width={20}
+          height={20}
+        />
       </IconButton>
 
       <IconButton
@@ -64,7 +80,12 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <TiktokIcon as={StyledIcon} />
+        <StyledIcon
+          src={TiktokIcon}
+          alt="TikTok"
+          width={20}
+          height={20}
+        />
       </IconButton>
 
       <IconButton
@@ -72,7 +93,12 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <TwitterIcon as={StyledIcon} />
+        <StyledIcon
+          src={TwitterIcon}
+          alt="Twitter"
+          width={20}
+          height={20}
+        />
       </IconButton>
     </SocialButtonContainer>
   );
