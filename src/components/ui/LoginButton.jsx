@@ -9,7 +9,7 @@ import { colors } from '../../themes/default';
 const StyledButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== 'type',
 })(({ theme, type }) => ({
-  fontWeight: 700,
+  fontWeight: 600,
   fontSize: '12px',
   lineHeight: '24px',
   width: '96px',
@@ -29,6 +29,7 @@ const StyledButton = styled(Button, {
     },
   }),
   ...(type === 'signup' && {
+    color: theme.palette.common.black,
     backgroundColor: colors.yellow,
     '&:hover': {
       backgroundColor: colors.yellow,

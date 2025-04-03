@@ -13,7 +13,7 @@ import { isLoggedIn } from '../../utils/helper';
 
 const StyledLogo = styled(CounterTenDesktopLogo)({
   height: '40px',
-  width: 'auto',
+  cursor: 'pointer',
 });
 
 const DesktopHeader = ({ tabsToShow, isEmbedToken = false }) => {
@@ -35,9 +35,8 @@ const DesktopHeader = ({ tabsToShow, isEmbedToken = false }) => {
         alignItems: 'center',
       }}
     >
-      <IconButton onClick={handleLogoClick}>
-        <StyledLogo />
-      </IconButton>
+
+      <StyledLogo onClick={handleLogoClick} />
 
       {!isEmbedToken && (
         <>

@@ -21,7 +21,7 @@ export const colors = {
   red: '#FF0000',
   black: '#212127',
   white: '#FFFFFF',
-  yellow: '#FFD700',
+  yellow: '#F6BE41',
   darkYellow: '#C09D47',
   ghostWhite: '#f8f9ff',
   footerGray: '#2B2D3A',

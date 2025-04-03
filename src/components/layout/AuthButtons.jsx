@@ -20,8 +20,8 @@ const AuthButtons = () => {
 
   return (
     <div className="display-inline-flex">
-      <LoginButtons type="login" label="Login" handleClick={handleLoginClick} />
-      <LoginButtons type="signup" label="Signup" handleClick={handleSignupClick} />
+      <LoginButtons type="login" label="LOGIN" handleClick={handleLoginClick} />
+      <LoginButtons type="signup" label="SIGNUP" handleClick={handleSignupClick} />
     </div>
   );
 };

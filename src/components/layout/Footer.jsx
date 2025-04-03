@@ -47,7 +47,6 @@ export default function Footer() {
                     <StyledImage
                         src={CounterTenDesktopHeaderLogo}
                         alt="logo"
-                        width={120}
                         height={40}
                         priority
                     />
