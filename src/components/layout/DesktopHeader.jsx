@@ -3,7 +3,6 @@
 import React from 'react';
 import { Box, IconButton, styled } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import { CounterTenDesktopLogo } from '../../assets';
@@ -12,7 +11,7 @@ import NavOptions from './NavOptions';
 import AuthButtons from './AuthButtons';
 import { isLoggedIn } from '../../utils/helper';
 
-const StyledLogo = styled(Image)({
+const StyledLogo = styled(CounterTenDesktopLogo)({
   height: '40px',
   width: 'auto',
 });
@@ -37,13 +36,7 @@ const DesktopHeader = ({ tabsToShow, isEmbedToken = false }) => {
       }}
     >
       <IconButton onClick={handleLogoClick}>
-        <StyledLogo
-          src={CounterTenDesktopLogo}
-          alt="CounterTen Logo"
-          width={120}
-          height={40}
-          priority
-        />
+        <StyledLogo />
       </IconButton>
 
       {!isEmbedToken && (
@@ -62,12 +55,12 @@ const DesktopHeader = ({ tabsToShow, isEmbedToken = false }) => {
 DesktopHeader.propTypes = {
   tabsToShow: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
       label: PropTypes.string.isRequired,
       link: PropTypes.string,
       subItems: PropTypes.arrayOf(
         PropTypes.shape({
-          id: PropTypes.string.isRequired,
+          id: PropTypes.number.isRequired,
           label: PropTypes.string.isRequired,
           link: PropTypes.string.isRequired,
         })

@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { colors } from '@/themes/default';
 import CustomTypography from './CustomTypography';
-import Image from 'next/image';
+import ArrowRightIcon from '@/assets/landingPage/arrow-right.svg';
 
 const Container = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -73,23 +73,29 @@ const SubTitle = styled(CustomTypography)({
   marginTop: '4px',
 });
 
-const StyledImage = styled(Image)({
+const StyledIcon = styled('svg')({
   width: '24px',
   height: '24px',
-  objectFit: 'contain',
+  fill: colors.lightGray,
+});
+
+const StyledArrowIcon = styled(ArrowRightIcon)({
+  width: '24px',
+  height: '24px',
+  fill: colors.lightGray,
 });
 
 const SelectorBox = ({
   title,
   subTitle,
   handleClick,
-  icon,
+  icon: Icon,
 }) => {
   return (
     <Container onClick={handleClick}>
       <InnerContainer>
         <IconContainer>
-          {icon && <StyledImage src={icon} alt={title} />}
+          {Icon && <StyledIcon as={Icon} />}
         </IconContainer>
         <TextContainer>
           <CustomTypography value={title} />
@@ -97,13 +103,7 @@ const SelectorBox = ({
         </TextContainer>
       </InnerContainer>
       <StyledArrowRight className="arrow">
-        <Image
-          src="/assets/landingPage/arrow-right.svg"
-          alt="Arrow Right"
-          width={24}
-          height={24}
-          style={{ fill: colors.lightGray }}
-        />
+        <StyledArrowIcon />
       </StyledArrowRight>
     </Container>
   );
@@ -113,7 +113,7 @@ SelectorBox.propTypes = {
   title: PropTypes.string.isRequired,
   subTitle: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  icon: PropTypes.elementType,
 };
 
 export default SelectorBox; 

@@ -3,7 +3,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Image from 'next/image';
 import {
   FacebookIcon,
   InstagramIcon,
@@ -23,7 +22,7 @@ const IconButton = styled('a')({
   display: 'inline-block',
 });
 
-const StyledIcon = styled(Image)(({ theme }) => ({
+const StyledIcon = styled('svg')(({ theme }) => ({
   color: colors.white,
   width: '20px',
   height: '20px',
@@ -41,12 +40,7 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <StyledIcon
-          src={LinkedinIcon}
-          alt="LinkedIn"
-          width={20}
-          height={20}
-        />
+        <StyledIcon as={LinkedinIcon} />
       </IconButton>
 
       <IconButton
@@ -54,12 +48,7 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <StyledIcon
-          src={FacebookIcon}
-          alt="Facebook"
-          width={20}
-          height={20}
-        />
+        <StyledIcon as={FacebookIcon} />
       </IconButton>
 
       <IconButton
@@ -67,12 +56,7 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <StyledIcon
-          src={InstagramIcon} 
-          alt="Instagram"
-          width={20}
-          height={20}
-        />
+        <StyledIcon as={InstagramIcon} />
       </IconButton>
 
       <IconButton
@@ -80,12 +64,7 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <StyledIcon
-          src={TiktokIcon}
-          alt="TikTok"
-          width={20}
-          height={20}
-        />
+        <StyledIcon as={TiktokIcon} />
       </IconButton>
 
       <IconButton
@@ -93,12 +72,7 @@ const SocialMediaLinks = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <StyledIcon
-          src={TwitterIcon}
-          alt="Twitter"
-          width={20}
-          height={20}
-        />
+        <StyledIcon as={TwitterIcon} />
       </IconButton>
     </SocialButtonContainer>
   );
