@@ -1,7 +1,9 @@
 import CounterTenLogo from './landingPage/counterTenLogo.png'
 import CounterTenWhiteLogo from './landingPage/counterTenWhiteLogo.png'
-import CircleLogo from './landingPage/circle.svg'
-import UploadLogo from './landingPage/upload.svg'
+// import CircleLogo from './landingPage/circle.svg'
+import { ReactComponent as CircleLogo } from "./landingPage/circle.svg";
+
+import { ReactComponent as UploadLogo } from './landingPage/upload.svg'
 import ArrowRight from './landingPage/arrow-right.svg'
 import WarningIcon from './landingPage/warning.svg'
 import SelectArrowIcon from './landingPage/selectArrow.svg'
@@ -48,31 +50,31 @@ import CounterTenDesktopHeaderLogoDark from './header/counterTenDesktopHeaderDar
 
 import CounterTenMobileHeaderLogo from './header/counterTenMobileHeader.png'
 import CounterTenDesktopLogo from './header/counterTenLogoDesktop.svg'
-import CounterTenMobileLogo from './header/counterTenLogoMobile.svg'
-import CounterTenMobileDark from './header/counterTenLogoDark.svg'
+import  CounterTenMobileLogo from './header/counterTenLogoMobile.svg'
+import  CounterTenMobileDark  from './header/counterTenLogoDark.svg'
 
 import CounterTenDesktopMobileFooterLogo from './footer/counterTenMobileFooter.png'
 
-import { ReactComponent as ApprovedCircle } from './buyTokenPage/approvedCircle.svg'
-import { ReactComponent as Shield } from './buyTokenPage/shield.svg'
+import ApprovedCircle  from './buyTokenPage/approvedCircle.svg'
+import Shield  from './buyTokenPage/shield.svg'
 
 import Metamask from './blockchainWallet/metamask.png'
 import Binance from './blockchainWallet/binance.png'
-import { ReactComponent as EthereumLogo } from './blockchain/ethereum.svg'
-import { ReactComponent as SolanaLogo } from './blockchain/solana.svg'
+import  EthereumLogo  from './blockchain/ethereum.svg'
+import  SolanaLogo  from './blockchain/solana.svg'
 
-import { ReactComponent as PlaidLogo } from './banking/plaid.svg'
+import PlaidLogo from './banking/plaid.svg'
 import creditCardsLogo from './banking/creditcard.png'
 import paypalLogo from './banking/paypal.png'
 
 import addAppleWallet from './user/add-to-apple-wallet-logo.png'
 import emailMe from './user/email.png'
 import googleWallet from './user/add-to-google-pay.png'
-import { ReactComponent as InfoIcon } from './icons8/info.svg'
-import { ReactComponent as HighImpactBorderAll } from './createNft/borderall.svg'
-import { ReactComponent as HighImpactBorderTop } from './createNft/bordertop.svg'
-import { ReactComponent as HighImpactBorderBottom } from './createNft/borderbottom.svg'
-import { ReactComponent as HighImpactBorderNone } from './createNft/bordernone.svg'
+import  InfoIcon from './icons8/info.svg'
+import  HighImpactBorderAll from './createNft/borderall.svg'
+import HighImpactBorderTop  from './createNft/bordertop.svg'
+import  HighImpactBorderBottom  from './createNft/borderbottom.svg'
+import  HighImpactBorderNone  from './createNft/bordernone.svg'
 import DefaultHighImpactImage from './createNft/defaultHighImpact.png'
 import DefaultGradientImage from './createNft/defaultGradientImage.png'
 

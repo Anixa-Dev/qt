@@ -1,56 +1,43 @@
-'use client';
-
+/* eslint-disable complexity */
 import { Grid } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { useFormikContext } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { isFormItemVisible } from '@/utils/stepFormHelper';
-import BgImgContainer from '@/components/layout/BgImgContainer';
-import StepContainer from '@/components/ui/StepButtonAndTextContainer';
+import { isFormItemVisible } from '../../utils/stepFormHelper';
+import BgImgContainer from '../layout/BgImgContainer';
+import StepContainer from './StepButtonAndTextContainer';
+import { makeStyles } from '@mui/styles';
 
-const StyledGrid = styled(Grid)(({ theme, customminheight, backblur }) => ({
-  minHeight: customminheight,
-  backdropFilter: backblur ? `blur(${backblur})` : '',
+const useStyles = makeStyles(() => ({
+  pageGrid: {
+    minHeight: (props) => props.customMinHeight,
+    backdropFilter: (props) => (props.backBlur ? `blur(${props.backBlur})` : ''),
+  },
 }));
 
 const ResponsiveIndex = ({
-  handleCancel = '',
-  handleBack = '',
-  totalSteps = '5',
-  activeStep,
-  value,
-  mobileValue,
-  imgType = 'img2',
-  clip = false,
-  children,
-  isEmailVerification = false,
-  onLogout = '',
-  userDetails = '',
-  isStepForm = true,
-  clipOrientation = 'left',
-  customMinHeight = '100vh',
-  disableBack = false,
-  backBlur = '',
-  direction = 'row',
-  isLastStep,
-  showNextButtonOnTop,
-  leftItem,
-  rightItem,
-  fullItem,
-  formType,
+  handleCancel = '', handleBack = '', totalSteps = '5', activeStep, value, mobileValue, imgType = 'img2', clip = false,
+  children, isEmailVerification = false, onLogout = '', userDetails = '', isStepForm = true, clipOrientation = 'left',
+  customMinHeight = '100vh', disableBack = false, backBlur = '', direction = 'row', isLastStep, showNextButtonOnTop,
+  leftItem, rightItem, fullItem, formType,
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const classes = useStyles({ customMinHeight, backBlur });
   const formik = useFormikContext();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 960);
-    };
+         setIsMobile(window.innerWidth <= 960);
+        
+       const handleResize = () => {
+          setIsMobile(window.innerWidth <= 960);
+         };
+        
+     window.addEventListener('resize', handleResize);
+        
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+       }, []);
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   let leftItemVisible = false;
   let rightItemVisible = false;
@@ -84,14 +71,12 @@ const ResponsiveIndex = ({
           showNextButtonOnTop={showNextButtonOnTop}
         />
       )}
-      <StyledGrid 
-        container 
-        direction={direction} 
-        customminheight={customMinHeight}
-        backblur={backBlur}
-      >
+      {/* <Grid container direction={direction} className={classes.pageGrid}>
         {children}
-      </StyledGrid>
+      </Grid> */}
+      <Grid direction={direction} className={classes.pageGrid}>
+        {children}
+      </Grid>
     </BgImgContainer>
   );
 };

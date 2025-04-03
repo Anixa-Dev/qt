@@ -1,62 +1,62 @@
-'use client';
+"use client";
 
-import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
-import { colors } from '@/themes/default';
-import CustomButton from './CustomButton';
-import CustomTypography from './CustomTypography';
-import StepFormProgress from './StepFormProgress';
+import { Box } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import PropTypes from "prop-types";
+import { colors } from "../../themes/default";
+import CustomButton from "./CustomButton";
+import CustomTypography from "./CustomTypography";
+import StepFormProgress from "./StepFormProgress";
 
 const TopActions = styled(Box)(({ theme }) => ({
-  [theme.breakpoints.down('sm')]: {
-    top: '0px',
+  [theme.breakpoints.down("sm")]: {
+    top: "0px",
     background: colors.white,
     zIndex: 10,
-    position: 'sticky',
-    paddingBottom: '20px',
+    position: "sticky",
+    paddingBottom: "20px",
     borderBottom: `1px solid ${colors.border}`,
-    borderRadius: '10px',
+    borderRadius: "10px",
   },
 }));
 
 const StepperButtonAndTextContainer = styled(Box)(({ theme, ismobile }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: ismobile ? '0 4vw 0 4vw' : '0 10vw',
-  marginTop: ismobile ? '0px' : '40px',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: ismobile ? "0 4vw 0 4vw" : "0 10vw",
+  marginTop: ismobile ? "0px" : "40px",
 }));
 
 const StepTextContainer = styled(Box)(({ ismobile }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  background: 'white',
-  padding: ismobile ? '2vh 4vw' : '4px 10px',
-  borderRadius: '10px',
+  display: "flex",
+  alignItems: "center",
+  background: "white",
+  padding: ismobile ? "2vh 4vw" : "4px 10px",
+  borderRadius: "10px",
   ...(ismobile && {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   }),
 }));
 
 const CancelButton = styled(CustomButton)({
-  height: '32px',
+  height: "32px",
   backgroundColor: colors.footerGray,
-  width: '96px',
+  width: "96px",
   color: colors.white,
 });
 
 const NextButton = styled(CustomButton)({
-  height: '32px',
+  height: "32px",
   backgroundColor: colors.yellow,
-  width: '96px',
+  width: "96px",
   color: colors.black,
 });
 
 const StepText = styled(CustomTypography)({
-  fontWeight: '700',
-  textAlign: 'right',
-  marginLeft: '5px',
+  fontWeight: "700",
+  textAlign: "right",
+  marginLeft: "5px",
 });
 
 const CreateAccStepText = styled(CustomTypography)({
@@ -90,7 +90,7 @@ const StepContainer = ({
       <StepperButtonAndTextContainer ismobile={isMobile}>
         {isEmailVerification ? (
           <CancelButton onClick={onLogout}>
-            {userDetails && userDetails.type === 'signup' ? 'Cancel' : 'Logout'}
+            {userDetails && userDetails.type === "signup" ? "Cancel" : "Logout"}
           </CancelButton>
         ) : activeStep === 1 ? (
           <CancelButton onClick={handleCancel}>Cancel</CancelButton>
@@ -108,10 +108,10 @@ const StepContainer = ({
         {showNextButtonOnTop && (
           <NextButton type="submit">
             {isLastStep
-              ? formType === 'edit'
-                ? 'Update'
-                : 'Complete'
-              : 'Next'}
+              ? formType === "edit"
+                ? "Update"
+                : "Complete"
+              : "Next"}
           </NextButton>
         )}
       </StepperButtonAndTextContainer>
@@ -135,4 +135,4 @@ StepContainer.propTypes = {
   formType: PropTypes.string,
 };
 
-export default StepContainer; 
+export default StepContainer;

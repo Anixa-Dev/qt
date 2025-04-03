@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from 'react';
 import { Box } from '@mui/material';
@@ -9,73 +9,73 @@ import CustomTypography from './CustomTypography';
 import ArrowRightIcon from '@/assets/landingPage/arrow-right.svg';
 
 const Container = styled(Box)(({ theme }) => ({
-  display: 'flex',
+  display: "flex",
   background: colors.white,
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '20px 16px',
-  boxShadow: '0px 2px 14px 1px rgba(0, 0, 0, 0.06)',
-  borderRadius: '6px',
-  border: '2px solid rgba(0, 0, 0, 0.06)',
-  margin: '10px 0px',
-  maxWidth: '500px',
-  cursor: 'pointer',
-  transition: 'all 0.3s ease',
-  '&:hover': {
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "20px 16px",
+  boxShadow: "0px 2px 14px 1px rgba(0, 0, 0, 0.06)",
+  borderRadius: "6px",
+  border: "2px solid rgba(0, 0, 0, 0.06)",
+  margin: "10px 0px",
+  maxWidth: "548px",
+  cursor: "pointer",
+  transition: "all 0.3s ease",
+  "&:hover": {
     border: `2px solid ${colors.yellow}`,
-    '& svg, path, g, circle': {
+    "& svg, path, g, circle": {
       fill: colors.yellow,
     },
-    '& .arrow': {
-      visibility: 'visible',
+    "& .arrow": {
+      visibility: "visible",
     },
   },
-  [theme.breakpoints.between('xs', '430')]: {
-    display: 'block',
-    padding: '10px',
+  [theme.breakpoints.between("xs", "430")]: {
+    display: "block",
+    padding: "10px",
   },
 }));
 
 const InnerContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  [theme.breakpoints.between('xs', '430')]: {
-    display: 'block',
+  display: "flex",
+  alignItems: "center",
+  [theme.breakpoints.between("xs", "430")]: {
+    display: "block",
   },
 }));
 
 const IconContainer = styled(Box)(({ theme }) => ({
-  padding: '0px 26px 0px 10px',
-  display: 'flex',
-  alignItems: 'center',
-  [theme.breakpoints.between('xs', '430')]: {
-    padding: '0px',
+  padding: "0px 26px 0px 10px",
+  display: "flex",
+  alignItems: "center",
+  [theme.breakpoints.between("xs", "430")]: {
+    padding: "0px",
   },
 }));
 
 const TextContainer = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
+  display: "flex",
+  flexDirection: "column",
 });
 
 const StyledArrowRight = styled(Box)({
-  visibility: 'hidden',
-  width: '24px',
-  height: '24px',
-  marginLeft: '10px',
-  position: 'relative',
+  visibility: "hidden",
+  width: "24px",
+  height: "24px",
+  // marginLeft: "10px",
+  position: "relative",
 });
 
 const SubTitle = styled(CustomTypography)({
-  fontSize: '14px',
-  lineHeight: '21px',
+  fontSize: "14px",
+  lineHeight: "21px",
   color: colors.lightGray,
-  marginTop: '4px',
+  fontWeight: 500,
 });
 
 const StyledIcon = styled('svg')({
-  width: '24px',
-  height: '24px',
+  // width: '24px',
+  // height: '24px',
   fill: colors.lightGray,
 });
 
@@ -98,7 +98,7 @@ const SelectorBox = ({
           {Icon && <StyledIcon as={Icon} />}
         </IconContainer>
         <TextContainer>
-          <CustomTypography value={title} />
+          <CustomTypography value={title} sx={{ fontWeight: 500 }} />
           {subTitle && <SubTitle value={subTitle} />}
         </TextContainer>
       </InnerContainer>
@@ -116,4 +116,6 @@ SelectorBox.propTypes = {
   icon: PropTypes.elementType,
 };
 
-export default SelectorBox; 
+export default SelectorBox;
+
+

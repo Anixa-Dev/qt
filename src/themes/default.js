@@ -26,7 +26,7 @@ export const colors = {
   ghostWhite: '#f8f9ff',
   footerGray: '#2B2D3A',
   helperGray: '#595959',
-  lightGray: '#6B7280',
+  lightGray: '#8692a6',
   lightBlue: '#6ac4b4',
   errorRed: '#941100',
   snow: '#fbfbfb',

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import "./globals.css";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
@@ -18,10 +18,10 @@ import { getStripe } from '@/utils/stripe';
 import { useState, useEffect } from 'react';
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-inter',
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
 });
 
 export default function RootLayout({ children }) {

@@ -1,10 +1,10 @@
 /* eslint-disable complexity */
-import Cookies from 'js-cookie';
-import jwt from 'jsonwebtoken';
-import Papa from 'papaparse';
-import imageCompression from 'browser-image-compression';
-import moment from 'moment';
-import mtz from 'moment-timezone';
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
+import Papa from "papaparse";
+import imageCompression from "browser-image-compression";
+import moment from "./momentConfig";
+import mtz from "moment-timezone";
 import CONSTANTS, {
   APPRECIATION_VALUES,
   BILLING_PERIODS_MAPS,
@@ -12,15 +12,15 @@ import CONSTANTS, {
   MOBILE_OS,
   PAYMENT_MODES,
   RECURRING_BILLING_PERIODS,
-} from './constants';
-import { appreciationSelectValues, currencySelectValues } from './selectValues';
+} from "./constants";
+import { appreciationSelectValues, currencySelectValues } from "./selectValues";
 
-export const getToken = () => Cookies.get('access_token');
+export const getToken = () => Cookies.get("access_token");
 
-export const removeToken = () => Cookies.remove('access_token');
+export const removeToken = () => Cookies.remove("access_token");
 
 export const getUserDetails = () => {
-  const token = Cookies.get('access_token');
+  const token = Cookies.get("access_token");
   let userDetails;
   if (token) {
     try {
@@ -47,17 +47,19 @@ export const getUserDetails = () => {
   return userDetails;
 };
 
-export const isLoggedIn = () => getUserDetails()?.type === 'login';
-export const isGuestUser = () => getUserDetails()?.type === 'guest';
+export const isLoggedIn = () => getUserDetails()?.type === "login";
+export const isGuestUser = () => getUserDetails()?.type === "guest";
 
-export const numberWithCommas = (x = 0) => x && x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export const numberWithCommas = (x = 0) =>
+  x && x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 export const getLabelFromValue = (value, field) => {
   const selectedField = field.find((item) => item.value === value);
-  return selectedField ? selectedField.label : '';
+  return selectedField ? selectedField.label : "";
 };
 
-export const sequezeStringLength = (str) => `${str?.slice(0, 5)}....${str?.slice(-5)}`;
+export const sequezeStringLength = (str) =>
+  `${str?.slice(0, 5)}....${str?.slice(-5)}`;
 
 export const insertStarsInNumber = (str) => `************${str?.slice(-4)}`;
 
@@ -77,11 +79,13 @@ export const getEthereumFromBrowser = () => {
 
 export const requestMetamaskWalletAccounts = async () => {
   const ethereum = getEthereumFromBrowser();
-  let primaryWalletAddress = '';
+  let primaryWalletAddress = "";
   if (hasEthereumInBrowser && ethereum && ethereum.isMetaMask) {
     try {
       // Request account access if needed
-      const [primaryAddress] = await ethereum.request({ method: 'eth_requestAccounts' });
+      const [primaryAddress] = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
       primaryWalletAddress = primaryAddress;
     } catch (error) {
       return null;
@@ -100,39 +104,43 @@ export const priceFilterLabel = ({ min, max }) => {
   return `$${min} - $${max}`;
 };
 
-export const capitalizeFirstLetter = (string) => string?.charAt(0)?.toUpperCase() + string?.slice(1);
+export const capitalizeFirstLetter = (string) =>
+  string?.charAt(0)?.toUpperCase() + string?.slice(1);
 
 export const WALLET_TYPES = {
-  ALL: 'all',
-  ETHEREUM: 'eth',
-  SOLANA: 'sol',
+  ALL: "all",
+  ETHEREUM: "eth",
+  SOLANA: "sol",
 };
 
 export const addressFormatter = (string) => {
   if (!string) {
-    return 'NA';
+    return "NA";
   }
   if (string === CONSTANTS.COUNTERTEN_ADMIN_WALLET_ADDRESS) {
     return string;
   }
-  return `${string.slice(0, 5)} ... ${string.slice(string.length - 5, string.length)}`;
+  return `${string.slice(0, 5)} ... ${string.slice(
+    string.length - 5,
+    string.length
+  )}`;
 };
 
 export const cardIssuer = (issuer) => {
-  if (issuer === 'diners') {
-    return 'dinersclub';
+  if (issuer === "diners") {
+    return "dinersclub";
   }
   return issuer;
 };
 
 export const cardNumberFormater = (issuer, last4) => {
-  if (issuer === 'amex' || issuer === 'diners') {
+  if (issuer === "amex" || issuer === "diners") {
     return `***********${last4}`;
   }
   return `************${last4}`;
 };
 
-export const csvToArray = (str, delimiter = ',') => {
+export const csvToArray = (str, delimiter = ",") => {
   let headers = [];
   let arr = [];
   const parsed = Papa.parse(str, { delimiter });
@@ -160,10 +168,7 @@ export const csvToArray = (str, delimiter = ',') => {
   return { arr, headers };
 };
 
-export const compressImage = async ({
-  imageFile,
-  options = {},
-}) => {
+export const compressImage = async ({ imageFile, options = {} }) => {
   try {
     const compressedFile = await imageCompression(imageFile, {
       maxIteration: 3,
@@ -187,19 +192,22 @@ export const compressImage = async ({
 
 export const unParseAndDownloadCSV = ({ buyerEmailList, fileName }) => {
   const csv = Papa.unparse(buyerEmailList);
-  const csvData = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const csvData = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const csvURL = window.URL.createObjectURL(csvData);
-  const eleLink = document.createElement('a');
-  eleLink.id = 'download-csv-email';
+  const eleLink = document.createElement("a");
+  eleLink.id = "download-csv-email";
   eleLink.href = csvURL;
-  eleLink.setAttribute('download', `${fileName}-${moment(moment.now()).format()}.csv`);
+  eleLink.setAttribute(
+    "download",
+    `${fileName}-${moment(moment.now()).format()}.csv`
+  );
   eleLink.click();
 };
 
 export const checkIsMobileBrowser = () => {
   if (
-    navigator.userAgent.match(/Android/i)
-    || navigator.userAgent.match(/iPhone/i)
+    navigator.userAgent.match(/Android/i) ||
+    navigator.userAgent.match(/iPhone/i)
   ) {
     return true;
   }
@@ -207,7 +215,7 @@ export const checkIsMobileBrowser = () => {
 };
 
 export const isWordStartWithVowel = ({ word }) => {
-  const vowelRegex = '^[aieouAIEOU].*';
+  const vowelRegex = "^[aieouAIEOU].*";
   const matched = word.match(vowelRegex);
   return matched;
 };
@@ -217,9 +225,9 @@ export const formDataFormatter = ({ data }) => {
   Object.keys(data).forEach((attr) => {
     if (Array.isArray(data[attr])) {
       formData.append(attr, JSON.stringify(data[attr]));
-    } else if (typeof data[attr] === 'boolean') {
+    } else if (typeof data[attr] === "boolean") {
       formData.append(attr, data[attr]);
-    } else if (data[attr] === '') {
+    } else if (data[attr] === "") {
       formData.append(attr, data[attr]);
     } else if (data[attr]) {
       formData.append(attr, data[attr]);
@@ -230,17 +238,12 @@ export const formDataFormatter = ({ data }) => {
 };
 
 export const addHideLayout = ({ item, currentList }) => {
-  const newList = [
-    ...currentList,
-    item,
-  ];
+  const newList = [...currentList, item];
   return newList;
 };
 
 export const removeHideLayout = ({ item, currentList }) => {
-  const newList = currentList.filter(
-    (attr) => attr !== item,
-  );
+  const newList = currentList.filter((attr) => attr !== item);
 
   return newList;
 };
@@ -271,13 +274,13 @@ export const getHideShowPreview = ({
 };
 
 export const hasFeaturedImageCustomizeOptions = (values) => {
-  const highImpactCardOptions = values.has_high_impact_card && (
-    values.ud_high_impact_card_title1
-    || values.ud_high_impact_card_title2
-    || values.ud_high_impact_card_title3
-    || values.ud_high_impact_card_image
-    || values.ud_high_impact_card_bg_image
-  );
+  const highImpactCardOptions =
+    values.has_high_impact_card &&
+    (values.ud_high_impact_card_title1 ||
+      values.ud_high_impact_card_title2 ||
+      values.ud_high_impact_card_title3 ||
+      values.ud_high_impact_card_image ||
+      values.ud_high_impact_card_bg_image);
 
   if (highImpactCardOptions) {
     return true;
@@ -287,13 +290,12 @@ export const hasFeaturedImageCustomizeOptions = (values) => {
 };
 
 export const hasPreviewPassCustomizationOptions = (values) => {
-  const layoutOptions = (
-    values.nft_image_by_user
-    || values.bg_image_by_user
-    || values.has_default_stats
-    || values.portrait_image_by_user
-    || values.ud_collectible_name
-  );
+  const layoutOptions =
+    values.nft_image_by_user ||
+    values.bg_image_by_user ||
+    values.has_default_stats ||
+    values.portrait_image_by_user ||
+    values.ud_collectible_name;
 
   if (layoutOptions) {
     return true;
@@ -303,7 +305,8 @@ export const hasPreviewPassCustomizationOptions = (values) => {
 };
 
 export const hasAdditionalInfoCustomizeOptions = (values) => {
-  const additionalInfoOptions = values.has_additional_info && values.ud_additional_info_detail;
+  const additionalInfoOptions =
+    values.has_additional_info && values.ud_additional_info_detail;
 
   if (additionalInfoOptions) {
     return true;
@@ -313,23 +316,23 @@ export const hasAdditionalInfoCustomizeOptions = (values) => {
 };
 
 export const hasCustomizationOptions = (values) => {
-  const layoutOptions = (
-    values.nft_image_by_user
-    || values.bg_image_by_user
-    || values.has_default_stats
-    || (values.with_portrait_image && values.portrait_image_by_user)
-    || values.ud_collectible_name
-  );
+  const layoutOptions =
+    values.nft_image_by_user ||
+    values.bg_image_by_user ||
+    values.has_default_stats ||
+    (values.with_portrait_image && values.portrait_image_by_user) ||
+    values.ud_collectible_name;
 
-  const highImpactCardOptions = values.has_high_impact_card && (
-    values.ud_high_impact_card_title1
-    || values.ud_high_impact_card_title2
-    || values.ud_high_impact_card_title3
-    || values.ud_high_impact_card_image
-    || values.ud_high_impact_card_bg_image
-  );
+  const highImpactCardOptions =
+    values.has_high_impact_card &&
+    (values.ud_high_impact_card_title1 ||
+      values.ud_high_impact_card_title2 ||
+      values.ud_high_impact_card_title3 ||
+      values.ud_high_impact_card_image ||
+      values.ud_high_impact_card_bg_image);
 
-  const additionalInfoOptions = values.has_additional_info && values.ud_additional_info_detail;
+  const additionalInfoOptions =
+    values.has_additional_info && values.ud_additional_info_detail;
 
   if (layoutOptions || highImpactCardOptions || additionalInfoOptions) {
     return true;
@@ -339,11 +342,15 @@ export const hasCustomizationOptions = (values) => {
 };
 
 export const getTzAbbr = () => {
-  const tzAbbr = mtz.tz(mtz.tz.guess()).format('z');
+  const tzAbbr = mtz.tz(mtz.tz.guess()).format("z");
   return tzAbbr;
 };
 
-export const replaceKeywordInOptionsLabel = ({ options, oldKeyword, newKeyword }) => {
+export const replaceKeywordInOptionsLabel = ({
+  options,
+  oldKeyword,
+  newKeyword,
+}) => {
   const newOptions = options.map((option) => ({
     ...option,
     label: option.label.replace(oldKeyword, newKeyword),
@@ -385,11 +392,10 @@ export const getBillingIntervalName = ({
   }
 };
 
-export const getPriceString = ({
-  currency,
-  amount,
-}) => `${getLabelFromValue(currency, currencySelectValues)}${
-  Number(amount).toFixed(2)}`;
+export const getPriceString = ({ currency, amount }) =>
+  `${getLabelFromValue(currency, currencySelectValues)}${Number(amount).toFixed(
+    2
+  )}`;
 
 export const getRecurringIntervalLabel = ({
   recurringInterval,
@@ -404,25 +410,35 @@ export const getRecurringIntervalLabel = ({
 };
 
 export const getCurrentPriceToken = (values) => {
-  let currentPriceText = '';
+  let currentPriceText = "";
 
   if (values?.payment_mode === PAYMENT_MODES.RECURRING) {
     const paymentPlan = values?.payment_plans[0];
-    const currency = getLabelFromValue(paymentPlan?.currency, currencySelectValues);
+    const currency = getLabelFromValue(
+      paymentPlan?.currency,
+      currencySelectValues
+    );
     const price = numberWithCommas(paymentPlan?.price);
 
-    const planText = `${currency}${price}/${paymentPlan?.recurring_interval_label || ''}`;
+    const planText = `${currency}${price}/${
+      paymentPlan?.recurring_interval_label || ""
+    }`;
     currentPriceText = `From ${planText}`;
   } else if (values?.payment_mode === PAYMENT_MODES.ONETIME) {
     const currency = getLabelFromValue(values?.currency, currencySelectValues);
     const price = numberWithCommas(values?.current_price);
-    let appreciation = getLabelFromValue(values?.appreciation, appreciationSelectValues);
+    let appreciation = getLabelFromValue(
+      values?.appreciation,
+      appreciationSelectValues
+    );
     if (values?.appreciation === APPRECIATION_VALUES.FIXED_PRICE) {
-      appreciation = '';
+      appreciation = "";
     }
 
-    currentPriceText = `${currency}${price} ${appreciation ? `(${appreciation})` : ''}`;
+    currentPriceText = `${currency}${price} ${
+      appreciation ? `(${appreciation})` : ""
+    }`;
   }
 
   return currentPriceText;
-}; 
+};

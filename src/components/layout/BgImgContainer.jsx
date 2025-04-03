@@ -1,113 +1,93 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
-import { colors } from '@/themes/default';
-import Image from 'next/image';
-import bg1 from '@/assets/landingPage/bg1.png';
-import bg2 from '@/assets/landingPage/bg2.png';
-import bg3 from '@/assets/landingPage/bg3.png';
+import React, { useState,useEffect } from 'react';
+import PropTypes from 'prop-types'
+import { Bg1, Bg3, Bg2 } from '../../assets'
+import { colors } from '../../themes/default'
+import { styled } from '@mui/material/styles'
+import { useFormikContext } from 'formik';
 
 const bgMapper = (imgType) => {
   const map = {
-    img1: bg1,
-    img2: bg2,
-    img3: bg3,
+    img1: Bg1?.src || Bg1, // Ensure it's a valid URL
+    img2: Bg2?.src || Bg2,
+    img3: Bg3?.src || Bg3,
   };
-  return map[imgType];
+  return map[imgType] || Bg1; // Default fallback
 };
 
-const Container = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'clipOrientation' && prop !== 'imgType',
-})(({ theme, cliporientation, imgtype }) => ({
+const Container = styled('div')(({imgType, theme,clipOrientation }) => ({
+  backgroundImage: `url(${bgMapper(imgType)})`,
+  // backgroundImage: (props) => `url(${ bgMapper(props.imgType) })`,
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: clipOrientation,
+  backgroundSize: '60vw 100%',
   position: 'relative',
   zIndex: '0',
   [theme.breakpoints.down('sm')]: {
-    '& img': {
-      width: '50vw !important',
-    },
+    backgroundSize: '50vw 100%',
   },
-}));
+}))
 
-const BackgroundImage = styled(Image)(({ theme, cliporientation }) => ({
-  position: 'absolute',
-  width: '60vw !important',
-  height: '100% !important',
-  objectFit: 'cover',
-  [theme.breakpoints.down('sm')]: {
-    width: '50vw !important',
-  },
-  ...(cliporientation === 'right' && {
-    right: 0,
-  }),
-  ...(cliporientation === 'left' && {
-    left: 0,
-  }),
-}));
-
-const ClipBackground = styled(Box)(({ theme, cliporientation }) => ({
+const ClipBg = styled('div')({
   position: 'absolute',
   backgroundColor: colors.white,
   width: '100%',
   height: '100%',
   zIndex: '-1',
-  ...(cliporientation === 'right' && {
-    clipPath: 'polygon(0 0, 70% 0, 40% 100%, 0% 100%)',
-    [theme.breakpoints.down('sm')]: {
-      clipPath: 'polygon(100% 0, 100% 50%, 50% 100%, 0 100%, 0 0)',
-    },
-  }),
-  ...(cliporientation === 'left' && {
-    clipPath: 'polygon(60% 0, 100% 0, 100% 100%, 30% 100%)',
-  }),
-}));
+})
+
+const ClipRight = styled(ClipBg)(({ theme }) => ({
+  clipPath: 'polygon(0 0, 70% 0, 40% 100%, 0% 100%)',
+  [theme.breakpoints.down('sm')]: {
+    clipPath: 'polygon(100% 0, 100% 50%, 50% 100%, 0 100%, 0 0)',
+  },
+}))
+
+const ClipLeft = styled(ClipBg)({
+  clipPath: 'polygon(60% 0, 100% 0, 100% 100%, 30% 100%)',
+})
 
 const BgImgContainer = ({
-  children,
-  clipOrientation,
-  imgType,
-  clip,
+  children, clipOrientation, imgType, clip,
 }) => {
-  const [isMounted, setIsMounted] = useState(false);
+ 
+  const [isMobile, setIsMobile] = useState(false);
+  const formik = useFormikContext();
 
   useEffect(() => {
-    setIsMounted(true);
-    const handleResize = () => {
-      // Your resize handling logic here
+    setIsMobile(window.innerWidth <= 960);
+        const handleResize = () => {
+      setIsMobile(window.innerWidth <= 960);
     };
-
+    
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
-
-  if (!isMounted) return null;
-
+  if (!clip && isMobile) {
+    return <>{children}</>
+  }
+  
   return (
-    <Container cliporientation={clipOrientation} imgtype={imgType}>
-      <BackgroundImage
-        src={bgMapper(imgType)}
-        alt="Background"
-        cliporientation={clipOrientation}
-        priority
-      />
-      {clip && <ClipBackground cliporientation={clipOrientation} />}
+    <Container imgType={imgType} clipOrientation={clipOrientation}>
+      {clipOrientation === 'right' && <ClipRight />}
+      {clipOrientation === 'left' && <ClipLeft />}
       {children}
     </Container>
-  );
-};
+  )
+}
 
 BgImgContainer.defaultProps = {
   children: <></>,
   clipOrientation: 'right',
   imgType: 'img1',
-};
+}
 
 BgImgContainer.propTypes = {
   children: PropTypes.node,
   clipOrientation: PropTypes.oneOf(['left', 'right']),
   imgType: PropTypes.string,
-};
+}
 
-export default BgImgContainer; 
+export default BgImgContainer

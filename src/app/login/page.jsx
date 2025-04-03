@@ -1,83 +1,49 @@
-'use client';
+/* eslint-disable no-nested-ternary */
+"use client";
+import React, { useEffect } from "react";
+import { Grid } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "next/navigation";
+import ResponsiveIndex from "../../components/ui/ResponsiveIndex";
+import {
+  resetSingleToken,
+  singleTokenRequestStart,
+} from "../../redux-saga/redux/token";
+import LoginRightItem from "../../components/ui/Login/LoginRightItem";
+import LoginLeftItem from "../../components/ui/Login/LoginLeftItem";
 
-import React from 'react';
-import { Box, Typography, Grid, Paper, TextField, Button, Link } from '@mui/material';
-import { useRouter } from 'next/navigation';
+const Login = () => {
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get("return_url");
+  const isCustomize = returnUrl?.split("/");
+  let tokenId = "";
 
-const LoginPage = () => {
-  const router = useRouter();
+  if (isCustomize?.[0] === "customize-nft") {
+    tokenId = isCustomize && isCustomize[1];
+  }
+
+  const dispatch = useDispatch();
+  const { tokenData } = useSelector((state) => state.getSingleToken);
+
+  useEffect(() => {
+    if (tokenId)
+      dispatch(singleTokenRequestStart({ token_id: tokenId, loader: true }));
+    return () => dispatch(resetSingleToken());
+  }, [tokenId]);
 
   return (
-    <Box sx={{ 
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      bgcolor: 'grey.100'
-    }}>
-      <Grid container justifyContent="center" alignItems="center" sx={{ py: 4 }}>
-        <Grid item xs={12} sm={8} md={6} lg={4}>
-          <Paper sx={{ p: 4 }}>
-            <Typography variant="h4" align="center" gutterBottom>
-              Login
-            </Typography>
-            <Typography variant="body1" align="center" color="text.secondary" gutterBottom>
-              Welcome back! Please login to your account.
-            </Typography>
-            <Box component="form" sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    type="email"
-                    variant="outlined"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Password"
-                    type="password"
-                    variant="outlined"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                  >
-                    Login
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Link 
-                      component="button"
-                      variant="body2"
-                      onClick={() => router.push('/forgot-password')}
-                    >
-                      Forgot Password?
-                    </Link>
-                    <Link 
-                      component="button"
-                      variant="body2"
-                      onClick={() => router.push('/signup')}
-                    >
-                      Don't have an account? Sign up
-                    </Link>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Box>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Box>
+    <ResponsiveIndex isStepForm={false}>
+        <Grid container>
+          <Grid size={{md:6,lg:6,xl:6,xs:12,sm:10 }}>
+            <LoginLeftItem />
+          </Grid>
+          <Grid size={{md:6,lg:6,xl:6, xs:12,sm:10 }}>
+           <LoginRightItem tokenData={tokenData} />
+          </Grid>
+      </Grid>       
+
+    </ResponsiveIndex>
   );
 };
 
-export default LoginPage;
+export default Login;
