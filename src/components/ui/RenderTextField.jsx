@@ -6,6 +6,7 @@ import moment from "moment";
 import CustomTextField from "../ui/CustomTextField";
 import CustomTypography from "../ui/CustomTypography";
 import { colors } from "../../themes/default";
+import PropTypes from 'prop-types';
 
 const useStyles = styled(() => ({
   textField: {
@@ -48,6 +49,7 @@ const RenderTextField = ({
   className,
   labelAlign = "left",
   onFocus,
+  inputRef,
 }) => {
   const classes = useStyles();
   const { handleChange, setFieldValue, values, errors, touched } =
@@ -123,9 +125,37 @@ const RenderTextField = ({
         multiline={multiline}
         rows={rows}
         disableHelperIcon={disableHelperIcon}
+        inputRef={inputRef}
       />
     </Grid>
   );
+};
+
+RenderTextField.propTypes = {
+  inputRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.any
+    })
+  ]),
+  label: PropTypes.string.isRequired,
+  formikIns: PropTypes.object,
+  toTrim: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  responsiveSettings: PropTypes.object,
+  rows: PropTypes.number,
+  multiline: PropTypes.bool,
+  inputClassName: PropTypes.string,
+  disabled: PropTypes.bool,
+  startAdornment: PropTypes.node,
+  endAdornment: PropTypes.node,
+  disableHelperIcon: PropTypes.bool,
+  constraints: PropTypes.object,
+  defaultValue: PropTypes.any,
+  className: PropTypes.string,
+  labelAlign: PropTypes.string,
+  onFocus: PropTypes.func,
 };
 
 export default RenderTextField;
