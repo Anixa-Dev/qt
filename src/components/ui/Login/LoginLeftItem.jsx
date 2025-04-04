@@ -6,7 +6,7 @@ import CircleLogo from "@/assets/landingPage/circle.svg";
 import HalfWidthItem from "../HalfWidthItem";
 import CustomButton from "../CustomButton";
 import { colors } from "../../../themes/default";
-import ROUTE_PATHS from "../../../routes/routesPath";
+import { ROUTE_PATHS } from '../../../routes/routesPath';
 import SelectorBox from "../SelectorBox";
 
 const StyledButton = styled(CustomButton)(({ theme }) => ({

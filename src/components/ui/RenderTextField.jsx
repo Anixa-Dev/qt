@@ -8,27 +8,48 @@ import CustomTypography from "../ui/CustomTypography";
 import { colors } from "../../themes/default";
 import PropTypes from 'prop-types';
 
-const useStyles = styled(() => ({
-  textField: {
-    minHeight: "46px",
-    paddingRight: "0px",
+// Styled components
+const StyledTextField = styled(CustomTextField)(({ theme }) => ({
+  minHeight: "46px",
+  paddingRight: "0px",
+  
+  '& .MuiInputBase-input:-webkit-autofill': {
+    WebkitBoxShadow: '0 0 0 100px rgb(232, 240, 254) inset',
+    WebkitTextFillColor: '#000000 !important',
+    WebkitAppearance: 'menulist-button',
+    WebkitBackgroundImage: 'none !important',
+    WebkitBackgroundColor: 'rgb(232, 240, 254) !important',
+    color: '#000000 !important',
   },
-  textFieldLabel: {
-    fontSize: "14px",
-    marginBottom: "6px",
-    float: "left",
-  },
-  adormentDivContainer: {
-    borderLeft: `1px solid ${colors.sonicSilver}`,
-    height: "46px",
-    paddingLeft: "10px",
-    background: colors.snow,
-    color: colors.eerieBlack,
-  },
-  adormentContainer: {
-    padding: "22px 16px 0 8px",
-  },
+  
+  '@media (prefers-color-scheme: dark)': {
+    '& .MuiInputBase-input:-webkit-autofill': {
+      WebkitBoxShadow: '0 0 0 100px rgba(70, 90, 126, 0.4) inset',
+      WebkitBackgroundColor: 'rgba(70, 90, 126, 0.4) !important',
+      WebkitTextFillColor: '#000000 !important',
+      color: '#000000 !important',
+    }
+  }
 }));
+
+const StyledLabel = styled(CustomTypography)({
+  fontSize: "14px",
+  marginBottom: "6px",
+  float: "left",
+  fontWeight: "500",
+});
+
+const AdornmentDiv = styled('div')({
+  borderLeft: `1px solid ${colors.sonicSilver}`,
+  height: "46px",
+  paddingLeft: "10px",
+  background: colors.snow,
+  color: colors.eerieBlack,
+});
+
+const AdornmentContainer = styled(InputAdornment)({
+  padding: "22px 16px 0 8px",
+});
 
 const RenderTextField = ({
   label,
@@ -49,11 +70,8 @@ const RenderTextField = ({
   className,
   labelAlign = "left",
   onFocus,
-  inputRef,
 }) => {
-  const classes = useStyles();
-  const { handleChange, setFieldValue, values, errors, touched } =
-    formikIns || {};
+  const { handleChange, setFieldValue, values, errors, touched } = formikIns || {};
   const { sm, xs, lg, md, xl } = responsiveSettings || {};
   const { min, max, step } = constraints || {};
   const [formattedValue, setFormattedValue] = useState("");
@@ -81,14 +99,14 @@ const RenderTextField = ({
       lg={lg}
       md={md}
       xl={xl}
+      sx={{width: "100%",paddingRight:'0px'}}
       className={className}
     >
-      <CustomTypography
+      <StyledLabel
         align={labelAlign}
         value={label}
-        className={classes.textFieldLabel}
       />
-      <CustomTextField
+      <StyledTextField
         onFocus={onFocus}
         onChange={(e) => {
           if (type === "number") {
@@ -106,17 +124,41 @@ const RenderTextField = ({
         value={displayValue}
         InputProps={{
           startAdornment: startAdornment && (
-            <InputAdornment position="start">{startAdornment}</InputAdornment>
+            <InputAdornment position="start">
+              {startAdornment}
+            </InputAdornment>
           ),
           endAdornment: endAdornment && (
-            <div className={classes.adormentDivContainer}>
-              <InputAdornment className={classes.adormentContainer}>
+            <AdornmentDiv>
+              <AdornmentContainer>
                 {endAdornment}
-              </InputAdornment>
-            </div>
+              </AdornmentContainer>
+            </AdornmentDiv>
           ),
-          className: inputClassName || classes.textField,
-          inputProps: { min, max, step },
+          className: inputClassName,
+          inputProps: { min, max, step ,},
+        }}
+        sx={{
+          '& .MuiOutlinedInput-root':{
+            paddingRight:'0px',
+            minHeight:'46px',
+            color:'#000',
+          },
+          '& .MuiInputBase-input:-webkit-autofill': {
+            '-webkit-box-shadow': '0 0 0 100px rgb(232, 240, 254) inset',
+            '-webkit-text-fill-color': 'inherit',
+            'appearance': 'menulist-button',
+            'background-image': 'none !important',
+            'background-color': 'rgb(232, 240, 254) !important',
+            'color': '#000 !important',
+          },
+          '@media (prefers-color-scheme: dark)': {
+            '& .MuiInputBase-input:-webkit-autofill': {
+              '-webkit-text-fill-color': '#000000 !important', // Force black text
+              'color': '#000000 !important', // Force black text
+            }
+          }
+          
         }}
         error={touched?.[name] && !!errors?.[name]}
         helperText={touched?.[name] && errors?.[name]}
@@ -125,19 +167,12 @@ const RenderTextField = ({
         multiline={multiline}
         rows={rows}
         disableHelperIcon={disableHelperIcon}
-        inputRef={inputRef}
       />
     </Grid>
   );
 };
 
 RenderTextField.propTypes = {
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.any
-    })
-  ]),
   label: PropTypes.string.isRequired,
   formikIns: PropTypes.object,
   toTrim: PropTypes.bool,

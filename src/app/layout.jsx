@@ -62,26 +62,24 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Provider store={store}>
-              {stripePromise ? (
-                <Elements stripe={stripePromise}>
-                  <Header />
-                  <main>{children}</main>
-                  <Footer />
-                </Elements>
-              ) : (
-                <>
-                  <Header />
-                  <main>{children}</main>
-                  <Footer />
-                </>
-              )}
-            </Provider>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Provider store={store}>
+            {stripePromise ? (
+              <Elements stripe={stripePromise}>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+              </Elements>
+            ) : (
+              <>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+              </>
+            )}
+          </Provider>
+        </ThemeProvider>
       </body>
     </html>
   );

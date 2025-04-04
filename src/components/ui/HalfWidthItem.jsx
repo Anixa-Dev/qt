@@ -127,7 +127,7 @@ const HalfWidthItem = ({
           </Box>
         </StepContainer>
       )}
-      <Box>
+      <Box sx={{display: 'flex', flexDirection: 'column'}}>
         <TitleWrapper>
           <TitleContainer>
             <Title

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Divider, Grid, useMediaQuery } from "@mui/material";
-import { styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,79 +21,79 @@ import config from "../../../utils/config";
 import CustomDialog from "../../ui/CustomDialog";
 import RenderTextField from "../../ui/RenderTextField";
 import ROUTE_PATHS from "../../../routes/routesPath";
-import { CircleLogo } from "../../../assets";
-import SelectorBox from "../SelectorBox";
-import { showErrorMessage } from "../../../redux-saga/redux/utils/snackbarReducer";
-import { ERROR_MESSAGES } from "../../../utils/constants";
 
-const useStyles = styled((theme) => ({
-  signinButton: {
-    height: "46px",
-    marginTop: "8px",
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-    },
+// Styled components
+const StyledSignInButton = styled(CustomButton)(({ theme }) => ({
+  height: "46px",
+  marginTop: "8px",
+  textTransform: "uppercase",
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
   },
-  googleButton: {
-    height: "48px",
-    textTransform: "none",
-    backgroundColor: colors.white,
-    border: `solid 1px ${colors.black}`,
-    borderRadius: "8px",
-    fontSize: "14px",
-    justifyContent: "space-around",
-    "&:hover": {
-      backgroundColor: "inherit",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-    },
+}));
+
+const StyledGoogleButton = styled(CustomButton)(({ theme }) => ({
+  height: "48px",
+  textTransform: "none",
+  backgroundColor: colors.white,
+  border: `solid 1px ${colors.black}`,
+  borderRadius: "8px",
+  fontSize: "14px",
+  justifyContent: "space-around",
+  "&:hover": {
+    backgroundColor: "inherit",
   },
-  orContainer: {
-    display: "flex",
-    alignItems: "center",
-    color: colors.lightGray,
-    gap: "13px",
-    margin: "15px 0px",
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
   },
-  orDivider: {
-    width: "45%",
+}));
+
+const StyledForgotButton = styled(CustomButton)({
+  textTransform: "none",
+  padding: "0px",
+  marginTop: "20px",
+  backgroundColor:'transparent',
+});
+
+const OrContainer = styled('div')({
+  display: "flex",
+  alignItems: "center",
+  color: colors.lightGray,
+  gap: "13px",
+  margin: "15px 0px",
+});
+
+const StyledDivider = styled(Divider)({
+  width: "45%",
+});
+
+const OrText = styled(CustomTypography)({
+  fontSize: "12px",
+});
+
+const DialogContent = styled('div')(({ theme }) => ({
+  textAlign: "left",
+  padding: "0px 13% 20px",
+  [theme.breakpoints.down("xs")]: {
+    padding: "0px 0px 20px",
   },
-  orText: {
-    fontSize: "12px",
+}));
+
+const SubmitButton = styled(CustomButton)(({ theme }) => ({
+  padding: "10px",
+  width: "200px",
+  marginBottom: "20px",
+  [theme.breakpoints.down("xs")]: {
+    width: "100%",
   },
-  forgotPasswordButton: {
-    textTransform: "none",
-    padding: "0px",
-    marginTop: "20px",
-  },
-  forgotTextField: {
-    textAlign: "left",
-    padding: "0px 13% 20px",
-    [theme.breakpoints.down("xs")]: {
-      padding: "0px 0px 20px",
-    },
-  },
-  submitEmailButton: {
-    padding: "10px",
-    width: "200px",
-    marginBottom: "20px",
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
-    },
-  },
-  successMessage: {
-    marginBottom: "10px",
-  },
-  dialogTitle: {
-    fontSize: "24px",
-    fontWeight: "700",
-    lineHeight: "1.27",
-    letterSpacing: "1.2px",
-    color: colors.yellow,
-    textAlign: "center",
-  },
-  dialogPaper: {
+}));
+
+const SuccessMessage = styled(CustomTypography)({
+  marginBottom: "10px",
+});
+
+const StyledDialog = styled(CustomDialog)(({ theme }) => ({
+  "& .MuiDialog-paper": {
     borderRadius: "10px",
     textAlign: "center",
     padding: "0px 10px",
@@ -101,34 +101,36 @@ const useStyles = styled((theme) => ({
       padding: "0px",
     },
   },
-  divider: {
-    marginBottom: "16px",
+  "& .dialog-title": {
+    fontSize: "24px",
+    fontWeight: "700",
+    lineHeight: "1.27",
+    letterSpacing: "1.2px",
+    color: colors.yellow,
+    textAlign: "center",
   },
 }));
 
-const loginValidationSchema = () =>
-  yup.object().shape({
-    email: yup
-      .string()
-      .required("Email is required")
-      .email("Please enter a valid email")
-      .max(150, "Email too Long"),
-    password: yup.string().required("Password is Required"),
-  });
+// Validation schemas
+const loginValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Email is required")
+    .email("Please enter a valid email")
+    .max(150, "Email too Long"),
+  password: yup.string().required("Password is Required"),
+});
 
-const forgotValidationSchema = () =>
-  yup.object().shape({
-    forgotPassEmail: yup
-      .string()
-      .required("Email is required")
-      .email("Please enter a valid email"),
-  });
+const forgotValidationSchema = yup.object().shape({
+  forgotPassEmail: yup
+    .string()
+    .required("Email is required")
+    .email("Please enter a valid email"),
+});
 
 const LoginRightItem = ({ tokenData }) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const [openForgetDialog, setOpenForgetDialog] = useState(false);
@@ -138,51 +140,9 @@ const LoginRightItem = ({ tokenData }) => {
     (state) => state.forgotPassword
   );
 
-  const onCloseForgotDialog = () => {
-    setOpenForgetDialog(false);
-    setSubmitted(false);
-  };
-
-  let returnUrl = "";
-  let newPathname = "";
-  let encodedReturnUrl = "";
-  let otherParams = "";
-
-  // Get the return_url from search params
+  // URL handling
   const returnUrlParam = searchParams.get("return_url");
-  if (returnUrlParam) {
-    try {
-      returnUrl = returnUrlParam;
-      // Extract the pathname from the return URL
-      const urlParts = returnUrl.split("?");
-      newPathname = urlParts[0];
-
-      // Get other query parameters
-      otherParams = urlParts.length > 1 ? urlParts[1] : "";
-
-      // Encode the return URL for the signup page
-      encodedReturnUrl = returnUrl
-        ? `?return_url=${encodeURIComponent(returnUrl)}`
-        : "";
-    } catch (error) {
-      console.error("Error processing return URL:", error);
-      // Set default values in case of error
-      newPathname = "/";
-      otherParams = "";
-      encodedReturnUrl = "";
-    }
-  }
-
-  // Safely check if origin is guest
-  let isOriginGuest = false;
-  try {
-    if (otherParams) {
-      const params = new URLSearchParams(otherParams);
-      isOriginGuest = params.get("origin") === "guest";
-    }
-  } catch (error) {
-    console.error("Error parsing URL parameters:", error);
-  }
+  const { newPathname, otherParams, encodedReturnUrl, isOriginGuest } = processUrlParams(returnUrlParam);
 
   useEffect(() => {
     if (success) {
@@ -191,12 +151,10 @@ const LoginRightItem = ({ tokenData }) => {
           pathname: newPathname || "/",
           search: otherParams || "",
         });
-
         dispatch(userInfoRequestStart());
         dispatch(companyInfoRequestStart());
       } catch (error) {
         console.error("Error during navigation:", error);
-        // Fallback to home page
         router.push("/");
       }
     }
@@ -212,7 +170,7 @@ const LoginRightItem = ({ tokenData }) => {
     onSubmit: (formValues) => {
       const requestData = {
         email: tokenData?.customization_email
-          ? tokenData?.customization_email.toLowerCase()
+          ? tokenData.customization_email.toLowerCase()
           : formValues.email.toLowerCase(),
         pass: formValues.password,
         delete_guest: isOriginGuest,
@@ -227,16 +185,20 @@ const LoginRightItem = ({ tokenData }) => {
       forgotPassEmail: "",
     },
     onSubmit: (formValues) => {
-      const requestData = { email: formValues.forgotPassEmail.toLowerCase() };
-      dispatch(forgotPasswordRequestStart(requestData));
+      dispatch(forgotPasswordRequestStart({ 
+        email: formValues.forgotPassEmail.toLowerCase() 
+      }));
       setSubmitted(true);
     },
   });
 
-  const { handleSubmit } = loginForm;
-
   const handleSignupClick = () => {
     router.push(`${ROUTE_PATHS.SIGNUP}${encodedReturnUrl}`);
+  };
+
+  const onCloseForgotDialog = () => {
+    setOpenForgetDialog(false);
+    setSubmitted(false);
   };
 
   return (
@@ -244,9 +206,9 @@ const LoginRightItem = ({ tokenData }) => {
       title="Sign In"
       subTitle="Already have an CounterTEN account? Sign In below"
     >
-      <Divider sx={{ marginBottom: "16px"}} />
-      <form onSubmit={handleSubmit}>
-        <Grid spacing={3} container>
+      <Divider sx={{ marginBottom: "16px" }} />
+      <form onSubmit={loginForm.handleSubmit}>
+        <Grid container spacing={3}>
           <RenderTextField
             formikIns={loginForm}
             label="Email"
@@ -261,72 +223,89 @@ const LoginRightItem = ({ tokenData }) => {
             toTrim={false}
           />
         </Grid>
-        <CustomButton
-          onClick={() => setOpenForgetDialog(true)}
-          className={classes.forgotPasswordButton}
-          variant="text"
-        >
+        
+        <StyledForgotButton onClick={() => setOpenForgetDialog(true)}>
           Forgot Password?
-        </CustomButton>
-        <CustomButton fullWidth type="submit" className={classes.signinButton}>
+        </StyledForgotButton>
+        
+        <StyledSignInButton fullWidth type="submit">
           Sign In
-        </CustomButton>
-        <div className={classes.orContainer}>
-          <Divider className={classes.orDivider} />
-          <CustomTypography value="Or" className={classes.orText} />
-          <Divider className={classes.orDivider} />
-        </div>
-        <CustomButton
+        </StyledSignInButton>
+
+        <OrContainer>
+          <StyledDivider />
+          <OrText value="Or" />
+          <StyledDivider />
+        </OrContainer>
+
+        <StyledGoogleButton
           startIcon={<GoogleIcon />}
           endIcon={<></>}
-          className={classes.googleButton}
           fullWidth
-          href={`${config.NODE_BASE_URL}/auth/google${
-            encodedReturnUrl ? `?return_url=${encodedReturnUrl}` : ""
-          }`}
+          href={`${config.NODE_BASE_URL}/auth/google${encodedReturnUrl}`}
         >
           Sign In with Google
-        </CustomButton>
+        </StyledGoogleButton>
       </form>
-      <CustomDialog
+
+      <StyledDialog
         title="Forgot Password"
         open={openForgetDialog}
         onClose={onCloseForgotDialog}
-        titleClassName={classes.dialogTitle}
-        PaperProps={{ className: classes.dialogPaper }}
         titlePlacement="center"
       >
         {submitted && !forgotPasswordLoading ? (
-          <CustomTypography
-            value={
-              "You'll get an Email with further details if it is registered"
-            }
-            className={classes.successMessage}
-          />
+          <SuccessMessage value="You'll get an Email with further details if it is registered" />
         ) : (
           <>
             <CustomTypography
-              value={
-                "Enter your email associated with your account. You'll get a reset password link there."
-              }
+              value="Enter your email associated with your account. You'll get a reset password link there."
             />
             <form onSubmit={forgotPasswordForm.handleSubmit}>
-              <div className={classes.forgotTextField}>
+              <DialogContent>
                 <RenderTextField
                   formikIns={forgotPasswordForm}
                   label="Email"
                   name="forgotPassEmail"
                 />
-              </div>
-              <CustomButton className={classes.submitEmailButton} type="submit">
+              </DialogContent>
+              <SubmitButton type="submit">
                 Submit
-              </CustomButton>
+              </SubmitButton>
             </form>
           </>
         )}
-      </CustomDialog>
+      </StyledDialog>
     </HalfWidthItem>
   );
 };
+
+// Helper function to process URL parameters
+function processUrlParams(returnUrlParam) {
+  let newPathname = "";
+  let otherParams = "";
+  let encodedReturnUrl = "";
+  let isOriginGuest = false;
+
+  if (returnUrlParam) {
+    try {
+      const returnUrl = returnUrlParam;
+      const urlParts = returnUrl.split("?");
+      newPathname = urlParts[0];
+      otherParams = urlParts.length > 1 ? urlParts[1] : "";
+      encodedReturnUrl = `?return_url=${encodeURIComponent(returnUrl)}`;
+
+      if (otherParams) {
+        const params = new URLSearchParams(otherParams);
+        isOriginGuest = params.get("origin") === "guest";
+      }
+    } catch (error) {
+      console.error("Error processing return URL:", error);
+      newPathname = "/";
+    }
+  }
+
+  return { newPathname, otherParams, encodedReturnUrl, isOriginGuest };
+}
 
 export default LoginRightItem;

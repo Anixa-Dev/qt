@@ -14,6 +14,7 @@ import { TOKEN_REFER_NAME } from '@/utils/constants';
 // Import images
 import CircleLogo from '@/assets/landingPage/circle.svg';
 import UploadLogo from '@/assets/landingPage/upload.svg';
+import HalfWidthItem from '../ui/HalfWidthItem';
 
 const Container = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -66,14 +67,12 @@ const LandingPageLeftItem = () => {
   const router = useRouter();
 
   return (
-    <Container>
-      <TitleContainer>
-        <Title value="Welcome to " />
-        <YellowTitle value="CounterTEN" />
-        <SubTitle value={`CounterTEN is the first mainstream ${TOKEN_REFER_NAME.toLowerCase()}s
-        platform for Enterprise Business.`} />
-      </TitleContainer>
-      <ContentContainer>
+    <HalfWidthItem 
+      title='Welcome to '
+      yellowTitle='CounterTEN'
+      subTitle={`CounterTEN is the first mainstream ${TOKEN_REFER_NAME.toLowerCase()}s
+      platform for Enterprise Business.`}
+    >
         <SelectorBox
           title="Business"
           subTitle={`Set up a new ${TOKEN_REFER_NAME.toLowerCase()} for your business product, service,
@@ -87,8 +86,7 @@ const LandingPageLeftItem = () => {
           handleClick={() => router.push('/user/my-tokens')}
           icon={UploadLogo}
         />
-      </ContentContainer>
-    </Container>
+    </HalfWidthItem>
   );
 };
 

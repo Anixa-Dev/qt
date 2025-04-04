@@ -130,9 +130,9 @@ CustomTextField.propTypes = {
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   label: PropTypes.string,
-  inputRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }) ]),
+  // inputRef: PropTypes.oneOfType([
+  //   PropTypes.func,
+  //   PropTypes.shape({ current: PropTypes.instanceOf(Element) }) ]),
   fullWidth: PropTypes.bool,
   variant: PropTypes.oneOf([ 'filled', 'outlined', 'standard' ]),
   className: PropTypes.string,
