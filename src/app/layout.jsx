@@ -16,6 +16,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getStripe } from '@/utils/stripe';
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,6 +24,31 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
 });
+
+// Client-only app content component
+const AppContent = dynamic(() => Promise.resolve(({ children, isLoading, stripePromise }) => {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (stripePromise) {
+    return (
+      <Elements stripe={stripePromise}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </Elements>
+    );
+  }
+  
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
+}), { ssr: false });
 
 export default function RootLayout({ children }) {
   const [stripePromise, setStripePromise] = useState(null);
@@ -49,37 +75,19 @@ export default function RootLayout({ children }) {
     initializeApp();
   }, []);
 
-  if (isLoading) {
-    return (
-      <html lang="en" className={inter.variable}>
-        <body>
-          <div>Loading...</div>
-        </body>
-      </html>
-    );
-  }
-
   return (
     <html lang="en" className={inter.variable}>
-      <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Provider store={store}>
-            {stripePromise ? (
-              <Elements stripe={stripePromise}>
-                <Header />
-                <main>{children}</main>
-                <Footer />
-              </Elements>
-            ) : (
-              <>
-                <Header />
-                <main>{children}</main>
-                <Footer />
-              </>
-            )}
-          </Provider>
-        </ThemeProvider>
+      <body suppressHydrationWarning={true}>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Provider store={store}>
+              <AppContent isLoading={isLoading} stripePromise={stripePromise}>
+                {children}
+              </AppContent>
+            </Provider>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

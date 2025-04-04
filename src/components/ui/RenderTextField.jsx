@@ -145,17 +145,17 @@ const RenderTextField = ({
             color:'#000',
           },
           '& .MuiInputBase-input:-webkit-autofill': {
-            '-webkit-box-shadow': '0 0 0 100px rgb(232, 240, 254) inset',
-            '-webkit-text-fill-color': 'inherit',
-            'appearance': 'menulist-button',
-            'background-image': 'none !important',
-            'background-color': 'rgb(232, 240, 254) !important',
-            'color': '#000 !important',
+            WebkitBoxShadow: '0 0 0 100px rgb(232, 240, 254) inset',
+            WebkitTextFillColor: 'inherit',
+            WebkitAppearance: 'menulist-button',
+            WebkitBackgroundImage: 'none !important',
+            WebkitBackgroundColor: 'rgb(232, 240, 254) !important',
+            color: '#000 !important',
           },
           '@media (prefers-color-scheme: dark)': {
             '& .MuiInputBase-input:-webkit-autofill': {
-              '-webkit-text-fill-color': '#000000 !important', // Force black text
-              'color': '#000000 !important', // Force black text
+              WebkitTextFillColor: '#000000 !important', 
+              color: '#000000 !important',
             }
           }
           
