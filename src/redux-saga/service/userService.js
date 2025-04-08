@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 import apiClient from '../../utils/apiClient'
 
 class User {
@@ -28,6 +30,8 @@ class User {
 
   static async login(data) {
     const response = await apiClient.postRequest('/user/login', data)
+    // setToken(token)
+    Cookies.set('access_token', response.data.data?.token)
     return response
   }
 

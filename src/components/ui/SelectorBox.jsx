@@ -18,7 +18,7 @@ const Container = styled(Box)(({ theme }) => ({
   borderRadius: "6px",
   border: "2px solid rgba(0, 0, 0, 0.06)",
   margin: "10px 0px",
-  maxWidth: "548px",
+  maxWidth: "536px",
   cursor: "pointer",
   transition: "all 0.3s ease",
   "&:hover": {

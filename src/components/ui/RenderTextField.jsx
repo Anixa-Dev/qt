@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 const StyledTextField = styled(CustomTextField)(({ theme }) => ({
   minHeight: "46px",
   paddingRight: "0px",
+  marginLeft: 0,
   
   '& .MuiInputBase-input:-webkit-autofill': {
     WebkitBoxShadow: '0 0 0 100px rgb(232, 240, 254) inset',
@@ -74,10 +75,11 @@ const RenderTextField = ({
   const { handleChange, setFieldValue, values, errors, touched } = formikIns || {};
   const { sm, xs, lg, md, xl } = responsiveSettings || {};
   const { min, max, step } = constraints || {};
-  const [formattedValue, setFormattedValue] = useState("");
+  const [formattedValue, setFormattedValue] = useState(defaultValue || "");
   const [isMounted, setIsMounted] = useState(false);
 
-  let value = values?.[name] || defaultValue;
+  // Initialize value with empty string if undefined
+  let value = (values?.[name] ?? defaultValue) || "";
 
   useEffect(() => {
     setIsMounted(true);
@@ -144,6 +146,13 @@ const RenderTextField = ({
             minHeight:'46px',
             color:'#000',
           },
+          '& .makeStyles-helperIcon-3': {
+               padding: 0,
+                margin: 0,
+              },
+              '& .css-afsgp6-MuiFormHelperText-root': {
+                   marginLeft: 0,
+               },
           '& .MuiInputBase-input:-webkit-autofill': {
             WebkitBoxShadow: '0 0 0 100px rgb(232, 240, 254) inset',
             WebkitTextFillColor: 'inherit',
@@ -151,13 +160,23 @@ const RenderTextField = ({
             WebkitBackgroundImage: 'none !important',
             WebkitBackgroundColor: 'rgb(232, 240, 254) !important',
             color: '#000 !important',
+            '&::selection': {
+              backgroundColor: 'rgb(232, 240, 254)',
+            },
+            '&::-moz-selection': {
+              backgroundColor: 'rgb(232, 240, 254)',
+            },
           },
           '@media (prefers-color-scheme: dark)': {
             '& .MuiInputBase-input:-webkit-autofill': {
               WebkitTextFillColor: '#000000 !important', 
               color: '#000000 !important',
             }
-          }
+          },
+          '& .MuiFormHelperText-root': {
+            marginLeft: 0,
+            marginTop: '8px'
+          },
           
         }}
         error={touched?.[name] && !!errors?.[name]}

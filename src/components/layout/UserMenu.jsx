@@ -22,8 +22,8 @@ import PropTypes from 'prop-types';
 import { AccountCircle } from '@mui/icons-material';
 import { logoutRequestStart } from '../../redux-saga/redux/actions';
 import { getToken, getUserDetails, removeToken } from '../../utils/helper';
-import { ROUTE_PATH_SHORTHANDS as ROUTE_PATHS } from '../../routes/routesPath';
 import { colors } from '../../themes/default';
+import { ROUTE_PATHS } from '@/routes/routesPath';
 
 const PROFILE_PIC_SIZE = 70;
 
@@ -194,7 +194,7 @@ const UserMenu = ({ anchor, setAnchor, userData }) => {
         {itemsToShow.map((item) => (
           <div key={item.id}>
             <ListItemStyled
-              button
+              button='true'
               onClick={() => router.push(item.href)}
             >
               <ItemLabel primary={item.label} />

@@ -59,7 +59,7 @@ const SubTitle = styled(CustomTypography)(({ theme, $subTitleColor }) => ({
   fontSize: "16px",
   lineHeight: "24px",
   color: colors[$subTitleColor] || colors.lightGray,
-  marginBottom: "10px",
+  // marginBottom: "10px",
   marginTop: "10px",
   fontWeight: 500,
 }));

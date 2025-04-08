@@ -9,3 +9,7 @@ export * from './userProfile'
 export * from './companyProfile'
 export * from './plaid'
 export * from './payment'
+
+export const resetUserDetails = () => ({
+  type: 'RESET_USER_DETAILS',
+});

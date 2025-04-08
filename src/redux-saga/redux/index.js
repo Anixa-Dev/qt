@@ -12,7 +12,6 @@ import plaidReducers from './plaid'
 import paymentReducers from './payment'
 
 const appReducer = combineReducers({
-
   // User Reducers
   ...userReducers,
 

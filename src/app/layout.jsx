@@ -14,9 +14,11 @@ import config from '@/utils/config';
 import Routes from "@/routes";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import CustomSnackbar from '@/components/ui/CustomSnackbar';
 import { getStripe } from '@/utils/stripe';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -37,6 +39,7 @@ const AppContent = dynamic(() => Promise.resolve(({ children, isLoading, stripeP
         <Header />
         <main>{children}</main>
         <Footer />
+        <CustomSnackbar />
       </Elements>
     );
   }
@@ -46,6 +49,7 @@ const AppContent = dynamic(() => Promise.resolve(({ children, isLoading, stripeP
       <Header />
       <main>{children}</main>
       <Footer />
+      <CustomSnackbar />
     </>
   );
 }), { ssr: false });
@@ -82,9 +86,9 @@ export default function RootLayout({ children }) {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <Provider store={store}>
-              <AppContent isLoading={isLoading} stripePromise={stripePromise}>
-                {children}
-              </AppContent>
+                <AppContent isLoading={isLoading} stripePromise={stripePromise}>
+                  {children}
+                </AppContent>
             </Provider>
           </ThemeProvider>
         </AppRouterCacheProvider>

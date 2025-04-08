@@ -38,7 +38,7 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com','staging-c10-company-logos.s3.amazonaws.com'],
   },
   // Add experimental features for better module resolution
   experimental: {

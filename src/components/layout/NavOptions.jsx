@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useRouter, usePathname } from 'next/navigation';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -148,7 +148,7 @@ const NavOptions = ({ tabsToShow }) => {
                 <div key={item.id}>
                   <ListContainer>
                     <ListItemStyled
-                      button
+                      button="true"
                       onClick={() => router.push(item.link)}
                     >
                       <ItemLabel primary={item.label} />
@@ -180,6 +180,7 @@ const NavOptions = ({ tabsToShow }) => {
           onClick={(e) => setOpenUserMenu(e.target)}
           sx={{ padding: 0 }}
         >
+          <div style={{color: 'red'}}>asdsadsadasd</div>
           {userData && (
             <StyledAvatar>
               {userData?.profile_pic ? (

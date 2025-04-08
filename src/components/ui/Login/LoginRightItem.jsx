@@ -16,6 +16,8 @@ import {
   userInfoRequestStart,
   userLoginRequestStart,
   resetUserDetails,
+  showSuccessMessage,
+  showErrorMessage,
 } from "../../../redux-saga/redux/actions";
 import config from "../../../utils/config";
 import CustomDialog from "../../ui/CustomDialog";
@@ -135,7 +137,7 @@ const LoginRightItem = ({ tokenData }) => {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const [openForgetDialog, setOpenForgetDialog] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const { success } = useSelector((state) => state.login);
+  const { success, error,data } = useSelector((state) => state.login);
   const { loading: forgotPasswordLoading } = useSelector(
     (state) => state.forgotPassword
   );
@@ -146,20 +148,22 @@ const LoginRightItem = ({ tokenData }) => {
 
   useEffect(() => {
     if (success) {
+      dispatch(showSuccessMessage({ msg: success.message || 'Login successful!' }));
       try {
-        router.push({
-          pathname: newPathname || "/",
-          search: otherParams || "",
-        });
+        const searchString = otherParams ? `?${otherParams}` : '';
+        router.push(`${newPathname || '/'}${searchString}`);
         dispatch(userInfoRequestStart());
         dispatch(companyInfoRequestStart());
       } catch (error) {
-        console.error("Error during navigation:", error);
+        dispatch(showErrorMessage({ msg: error.message || 'Error during navigation' }));
         router.push("/");
       }
     }
+    if (error) {
+      dispatch(showErrorMessage({ msg: 'Invalid credentials' }));
+    }
     return () => dispatch(resetUserDetails());
-  }, [success]);
+  }, [success, error]);
 
   const loginForm = useFormik({
     validationSchema: loginValidationSchema,
@@ -192,9 +196,9 @@ const LoginRightItem = ({ tokenData }) => {
     },
   });
 
-  const handleSignupClick = () => {
-    router.push(`${ROUTE_PATHS.SIGNUP}${encodedReturnUrl}`);
-  };
+  // const handleSignupClick = () => {
+  //   router.push(`${ROUTE_PATHS.SIGNUP}${encodedReturnUrl}`);
+  // };
 
   const onCloseForgotDialog = () => {
     setOpenForgetDialog(false);

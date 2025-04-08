@@ -34,13 +34,12 @@ const Login = () => {
   return (
     <ResponsiveIndex isStepForm={false}>
         <Grid container>
-          asdsaf
-          {/* <Grid size={{md:6,lg:6,xl:6,xs:12,sm:10 }}>
+          <Grid size={{md:6,lg:6,xl:6,xs:12,sm:10 }}>
             <LoginLeftItem />
           </Grid>
           <Grid size={{md:6,lg:6,xl:6, xs:12,sm:10 }}>
            <LoginRightItem tokenData={tokenData} />
-          </Grid> */}
+          </Grid>
       </Grid>       
 
     </ResponsiveIndex>
