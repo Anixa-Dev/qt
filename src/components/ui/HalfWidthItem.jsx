@@ -13,11 +13,12 @@ import { TOKEN_REFER_NAME } from "@/utils/constants";
 
 const Container = styled(Box, {
   shouldForwardProp: (prop) =>
-    prop !== "containerPadding" && prop !== "containerMinHeight",
-})(({ theme, containerPadding, containerMinHeight }) => ({
-  position: "relative",
+    prop !== "containerPadding" && prop !== "containerMinHeight" && prop !== "containerTop",
+})(({ theme, containerPadding, containerMinHeight, containerTop,containerposition }) => ({
+  position:containerposition ||  'sticky',
   minHeight: containerMinHeight || "100vh",
   padding: containerPadding || "8vh 10vw",
+  top: containerTop || "0",
   [theme.breakpoints.down("sm")]: {
     padding: containerPadding || "4vh 4vw 10vh 4vw",
   },
@@ -98,7 +99,9 @@ const HalfWidthItem = ({
   subTitleColor,
   stepSettings,
   addText,
+  containerTop,
   containerPadding,
+  containerposition,
   containerMinHeight,
   addTimer,
   override,
@@ -113,6 +116,8 @@ const HalfWidthItem = ({
     <Container
       containerPadding={containerPadding}
       containerMinHeight={containerMinHeight}
+      containerTop={containerTop}
+      containerposition={containerposition}
     >
       {enabled && (
         <StepContainer>
@@ -174,7 +179,9 @@ HalfWidthItem.propTypes = {
     totalSteps: PropTypes.number,
   }),
   addText: PropTypes.string,
+  containerTop: PropTypes.string,
   containerPadding: PropTypes.string,
+  containerposition: PropTypes.string,
   containerMinHeight: PropTypes.string,
   addTimer: PropTypes.object,
   override: PropTypes.bool,

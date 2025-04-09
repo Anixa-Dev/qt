@@ -2,6 +2,7 @@ const config = {
   APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL || 'http://dev1.qlctr.com',
   PREVIEW_PASS_URL: process.env.NEXT_PUBLIC_PREVIEW_PASS_URL || 'http://localhost:6000',
   NODE_ENV: process.env.NODE_ENV || 'development',
+  // NODE_BASE_URL: process.env.NEXT_PUBLIC_NODE_BASE_URL || 'https://staging.counterten.com/api/v1',
   NODE_BASE_URL: process.env.NEXT_PUBLIC_NODE_BASE_URL || 'http://localhost:4000/api/v1',
   COUNTER_TEN_LOGO: process.env.NEXT_PUBLIC_COUNTER_TEN_LOGO,
   COUNTER_TEN_LOGO_LIGHT: process.env.NEXT_PUBLIC_COUNTER_TEN_LOGO_LIGHT,

@@ -22,7 +22,7 @@ import {
 import config from "../../../utils/config";
 import CustomDialog from "../../ui/CustomDialog";
 import RenderTextField from "../../ui/RenderTextField";
-import ROUTE_PATHS from "../../../routes/routesPath";
+import {ROUTE_PATHS} from "../../../routes/routesPath";
 
 // Styled components
 const StyledSignInButton = styled(CustomButton)(({ theme }) => ({
@@ -151,12 +151,12 @@ const LoginRightItem = ({ tokenData }) => {
       dispatch(showSuccessMessage({ msg: success.message || 'Login successful!' }));
       try {
         const searchString = otherParams ? `?${otherParams}` : '';
-        router.push(`${newPathname || '/'}${searchString}`);
+        router.push(`${newPathname || ROUTE_PATHS.COMPANY_TOKENS}${searchString}`);
         dispatch(userInfoRequestStart());
         dispatch(companyInfoRequestStart());
       } catch (error) {
         dispatch(showErrorMessage({ msg: error.message || 'Error during navigation' }));
-        router.push("/");
+        router.push(ROUTE_PATHS.COMPANY_TOKENS);
       }
     }
     if (error) {
@@ -210,7 +210,7 @@ const LoginRightItem = ({ tokenData }) => {
       title="Sign In"
       subTitle="Already have an CounterTEN account? Sign In below"
     >
-      <Divider sx={{ marginBottom: "16px" }} />
+      <Divider sx={{ marginBottom: "16px",marginTop:'10px' }} />
       <form onSubmit={loginForm.handleSubmit}>
         <Grid container spacing={3}>
           <RenderTextField

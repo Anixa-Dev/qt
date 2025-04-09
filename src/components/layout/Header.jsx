@@ -10,6 +10,7 @@ import { colors } from '../../themes/default';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 import { ROUTE_PATH_SHORTHANDS } from '../../routes/routesPath';
+import { textTransform } from '@mui/system';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: colors.blackBase,
@@ -17,6 +18,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     padding: '16px',
     backgroundColor: colors.white,
+    textTransform: 'uppercase',
   },
 }));
 

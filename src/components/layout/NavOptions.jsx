@@ -46,8 +46,8 @@ const TabContainer = styled(Box)({
 
 const TabButton = styled(Button)({
   color: colors.white,
-  padding: 'auto 2px',
-  minWidth: '0px',
+  paddingLeft:'2px',
+  paddingRight:'2px',
   '&:hover': {
     color: colors.yellow,
   },
@@ -55,7 +55,8 @@ const TabButton = styled(Button)({
 
 const CreditLabel = styled('span')({
   color: colors.yellow,
-  padding: 'auto 2px',
+  paddingLeft:'2px',
+  paddingRight:'2px',
   minWidth: '0px',
   margin: '0px 5px',
   fontSize: '16px',
@@ -117,6 +118,7 @@ const NavOptions = ({ tabsToShow }) => {
   const pathname = usePathname();
   const [openUserMenu, setOpenUserMenu] = useState(null);
   const { userData } = useSelector((state) => state.userInfo);
+  console.log('userData', userData);
   const { companyData } = useSelector((state) => state.companyInfo);
   const firstName = userData?.first_name;
   const lastName = userData?.last_name;
@@ -180,7 +182,6 @@ const NavOptions = ({ tabsToShow }) => {
           onClick={(e) => setOpenUserMenu(e.target)}
           sx={{ padding: 0 }}
         >
-          <div style={{color: 'red'}}>asdsadsadasd</div>
           {userData && (
             <StyledAvatar>
               {userData?.profile_pic ? (

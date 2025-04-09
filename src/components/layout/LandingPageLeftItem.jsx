@@ -15,6 +15,7 @@ import { TOKEN_REFER_NAME } from '@/utils/constants';
 import CircleLogo from '@/assets/landingPage/circle.svg';
 import UploadLogo from '@/assets/landingPage/upload.svg';
 import HalfWidthItem from '../ui/HalfWidthItem';
+import { ROUTE_PATHS } from '@/routes/routesPath';
 
 const Container = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -70,20 +71,20 @@ const LandingPageLeftItem = () => {
     <HalfWidthItem 
       title='Welcome to '
       yellowTitle='CounterTEN'
-      subTitle={`CounterTEN is the first mainstream ${TOKEN_REFER_NAME.toLowerCase()}s
+      subTitle={ `CounterTEN is the first mainstream ${ TOKEN_REFER_NAME.toLocaleLowerCase() }s
       platform for Enterprise Business.`}
     >
         <SelectorBox
           title="Business"
           subTitle={`Set up a new ${TOKEN_REFER_NAME.toLowerCase()} for your business product, service,
           perk or ${TOKEN_REFER_NAME.toLowerCase()}.`}
-          handleClick={() => router.push('/company/create-token')}
+          handleClick={() => router.push(ROUTE_PATHS.CREATE_TOKEN)}
           icon={CircleLogo}
         />
         <SelectorBox
           title="Purchases"
           subTitle={`Buy ${TOKEN_REFER_NAME.toLowerCase()}s on our secure platform`}
-          handleClick={() => router.push('/user/my-tokens')}
+          handleClick={() => router.push(ROUTE_PATHS.MY_TOKENS)}
           icon={UploadLogo}
         />
     </HalfWidthItem>

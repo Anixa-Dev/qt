@@ -98,7 +98,7 @@ const CustomDialog = ({
       fullScreen={fullScreen}
     >
       {!noTitle && (
-        <StyledDialogTitle disableTypography titlePlacement={titlePlacement}>
+        <StyledDialogTitle titlePlacement={titlePlacement}>
           <CustomTypography className={titleClassName} value={title} />
           {hasCloseButton && (
             <CloseIconContainer

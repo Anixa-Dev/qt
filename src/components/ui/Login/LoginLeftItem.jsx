@@ -56,6 +56,8 @@ const LoginLeftItem = () => {
       }
       titleColor={isMobile ? "blackRussian" : "white"}
       containerMinHeight="10vh"
+      containerTop={"72px"}
+      containerposition={isMobile ? "relative" : "fixed"}
       containerPadding={isMobile ? "4vh 4vw 0vh 4vw" : "8vh 10vw"}
     >
       {isMobile ? (

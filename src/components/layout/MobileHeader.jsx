@@ -148,7 +148,12 @@ const MobileHeader = ({ tabsToShow, isEmbedToken = false }) => {
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <IconButton onClick={onHeaderLogoClick}>
-          <Image src={CounterTenMobileDark} alt="CounterTen Logo" width={120} height={40} />
+          <Image 
+            src="/images/CounterTenMobileDark.png"
+            alt="CounterTen Logo" 
+            width={120} 
+            height={40} 
+          />
         </IconButton>
 
         {!isEmbedToken && (
@@ -167,7 +172,12 @@ const MobileHeader = ({ tabsToShow, isEmbedToken = false }) => {
           <DrawerWrapper>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <IconButton onClick={onHeaderLogoClick}>
-                <Image src={CounterTenMobileDark} alt="CounterTen Logo" width={120} height={40} />
+                <Image 
+                  src="/images/CounterTenMobileDark.png"
+                  alt="CounterTen Logo" 
+                  width={120} 
+                  height={40} 
+                />
               </IconButton>
               <IconButton onClick={() => setMobileMenu((prevState) => !prevState)}>
                 <Close />

@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 import { Elements } from '@stripe/react-stripe-js';
 import LogRocket from 'logrocket';
 import theme from '@/themes/default';
-import store from '@/redux-saga/store';
 import config from '@/utils/config';
 import Routes from "@/routes";
 import Header from '@/components/layout/Header';
@@ -19,6 +18,8 @@ import { getStripe } from '@/utils/stripe';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { PersistGate } from 'redux-persist/integration/react';
+import store from "@/redux-saga/redux/store";
+import { AuthProvider } from "@/contexts/auth-context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -86,9 +87,11 @@ export default function RootLayout({ children }) {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <Provider store={store}>
+              <AuthProvider>
                 <AppContent isLoading={isLoading} stripePromise={stripePromise}>
                   {children}
                 </AppContent>
+              </AuthProvider>
             </Provider>
           </ThemeProvider>
         </AppRouterCacheProvider>
